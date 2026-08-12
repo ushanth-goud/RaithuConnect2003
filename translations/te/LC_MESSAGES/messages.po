@@ -1,0 +1,130 @@
+# Telugu translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-05-04 20:24+0530\n"
+"PO-Revision-Date: 2025-05-04 20:24+0530\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: te\n"
+"Language-Team: te <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+msgid "RaithuConnect"
+msgstr "రైతు కనెక్ట్"
+
+msgid "Home"
+msgstr "హోమ్"
+
+msgid "About"
+msgstr "గురించి"
+
+msgid "Contact"
+msgstr "సంప్రదించండి"
+
+msgid "English"
+msgstr "ఇంగ్లీష్"
+
+msgid "Telugu"
+msgstr "తెలుగు"
+
+msgid "Hindi"
+msgstr "హిందీ"
+
+msgid "Welcome to RaithuConnect"
+msgstr "రైతు కనెక్ట్‌కు స్వాగతం"
+
+msgid "Connecting Farmers with the Right Agricultural Workers"
+msgstr "సరైన వ్యవసాయ కార్మికులతో రైతులను కలిపే పనిలో"
+
+msgid "Workers can Register Here!!!"
+msgstr "కార్మికులు ఇక్కడ నమోదు చేసుకోండి!!!"
+
+msgid "All Workers"
+msgstr "అన్ని కార్మికులు"
+
+msgid "Register Worker"
+msgstr "కార్మికుని నమోదు చేయండి"
+
+msgid "Work Categories"
+msgstr "పనుల వర్గాలు"
+
+msgid "Plantation Workers"
+msgstr "వనరూపణ కార్మికులు"
+
+msgid "Hire skilled workers for plantation activities."
+msgstr "వనరూపణ కార్యక్రమాల కోసం నైపుణ్యం గల కార్మికులను అద్దెకు తీసుకోండి."
+
+msgid "Get Details"
+msgstr "వివరాలు పొందండి"
+
+msgid "Tractor Workers"
+msgstr "ట్రాక్టర్ కార్మికులు"
+
+msgid "Find tractor drivers and equipment handlers."
+msgstr "ట్రాక్టర్ డ్రైవర్లు మరియు పరికరాల నిర్వాహకులను కనుగొనండి."
+
+msgid "Harvester Workers"
+msgstr "హార్వెస్టర్ కార్మికులు"
+
+msgid "Connect with harvesters ready to assist in the field."
+msgstr "ఫీల్డ్‌లో సహాయపడేందుకు సిద్ధంగా ఉన్న హార్వెస్టర్లతో కనెక్ట్ అవ్వండి."
+
+msgid "Drone Workers"
+msgstr "డ్రోన్ కార్మికులు"
+
+msgid "Hire operators for drone-based crop spraying and monitoring."
+msgstr "పంటల స్ప్రే మరియు మానిటరింగ్ కోసం డ్రోన్ ఆపరేటర్లను అద్దెకు తీసుకోండి."
+
+msgid "JCB Workers"
+msgstr "JCB కార్మికులు"
+
+msgid "Find skilled JCB operators for heavy lifting and clearing tasks."
+msgstr "భారీ లిఫ్టింగ్ మరియు క్లియరింగ్ పనుల కోసం నైపుణ్యం గల JCB ఆపరేటర్లను కనుగొనండి."
+
+msgid "Sprayer Workers"
+msgstr "స్ప్రేయర్ కార్మికులు"
+
+msgid "Connect with workers for manual pesticide and fertilizer spraying."
+msgstr "పరిమితంగా మందులు మరియు ఎరువుల స్ప్రే కోసం కార్మికులతో కనెక్ట్ అవ్వండి."
+
+msgid "Weeding Workers"
+msgstr "పొలాల్లో కలప తొలగింపు కార్మికులు"
+
+msgid "Hire laborers for efficient field weeding services."
+msgstr "ప్రభావవంతమైన కలప తొలగింపు సేవల కోసం కార్మికులను అద్దెకు తీసుకోండి."
+
+msgid "Borewells Workers"
+msgstr "బోరు వెల్స్ కార్మికులు"
+
+msgid "Locate experts in borewell digging and maintenance."
+msgstr "బోరు తవ్వడం మరియు నిర్వహణలో నిపుణులను కనుగొనండి."
+
+msgid "Agrochemicals Dealers"
+msgstr "వ్యవసాయ రసాయనాల డీలర్లు"
+
+msgid "Connect with dealers for pesticides, fertilizers, and other agro-products."
+msgstr "పంట మందులు, ఎరువులు మరియు ఇతర వ్యవసాయ ఉత్పత్తుల డీలర్లతో కనెక్ట్ అవ్వండి."
+
+msgid "RaithuConnect. All rights reserved."
+msgstr "రైతు కనెక్ట్. అన్ని హక్కులు లభించాయి."
+
+msgid "Terms"
+msgstr "నిబంధనలు"
+
+msgid "Login"
+msgstr "లాగిన్"
+
+msgid "Enhancing Agricultural Connectivity with RaithuConnect"
+msgstr "రైతు కనెక్ట్‌తో వ్యవసాయ అనుసంధానతను మెరుగుపరచడం"
+
+msgid "SIGN UP"
+msgstr "నమోదు అవ్వండి"

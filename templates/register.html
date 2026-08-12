@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Worker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">Register Worker</h2>
+  <form method="POST" action="{{ url_for('register') }}" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Name" required>
+
+    <select name="work_type" required>
+      <option value="" disabled selected>Select Work Type</option>
+      <option value="Plantation">Plantation</option>
+      <option value="Tractor">Tractor</option>
+      <option value="Harvester">Harvester</option>
+      <option value="Drone">Drone</option>
+      <option value="JCB">JCB</option>
+      <option value="Sprayer">Sprayer</option>
+      <option value="Weeding">Weeding</option>
+      <option value="Borewell">Borewell</option>
+      <option value="Agrochemicals">Agrochemicals</option>
+    </select>
+
+    <input type="text" name="location" placeholder="Location" required>
+    <input type="text" name="contact" placeholder="Contact" required>
+
+    <select name="availability" required>
+      <option value="" disabled selected>Availability</option>
+      <option value="Available">Available</option>
+      <option value="Not Available">Not Available</option>
+    </select>
+
+    <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+
+    <input type="file" name="image" accept="image/*">
+
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RaithuConnect Workers</title>
+
+<style>
+.worker-category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.worker-card {
+    width: 250px;
+    padding: 15px;
+    border-radius: 10px;
+    background:#E0F7FA;
+    text-align: center;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    color: darkblue;
+}
+.name1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(191, 56, 3);
+}
+.name2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(13, 109, 2);
+}
+.call-btn { background: green; color: white; padding: 6px; text-decoration: none; }
+.call-btn1 { background: blue; color: white; padding: 6px; text-decoration: none; }
+.call-btn2 { background: red; color: white; padding: 6px; text-decoration: none; }
+
+/* Navbar container */
+.navbar {
+    background-color: #2E8B57;  /* Dark green background */
+    overflow: hidden;           /* Clear floats */
+    display: flex;              /* Flexbox for horizontal layout */
+    justify-content: flex-start; /* Align items to left */
+    padding: 10px 20px;         /* Space inside navbar */
+    border-radius: 8px;         /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+/* Navbar links */
+.navbar a {
+    color: white;               /* White text */
+    text-decoration: none;      /* Remove underline */
+    padding: 12px 18px;         /* Spacing around text */
+    margin-right: 10px;         /* Space between links */
+    font-weight: bold;           /* Bold text */
+    font-family: Arial, sans-serif;
+    border-radius: 4px;         /* Rounded corners for links */
+    transition: background 0.3s, transform 0.2s; /* Smooth hover effect */
+}
+
+/* Hover effect */
+.navbar a:hover {
+    background-color: #3CB371;  /* Lighter green on hover */
+    transform: scale(1.05);     /* Slight grow on hover */
+}
+
+/* Active link styling (optional) */
+.navbar a.active {
+    background-color: #66CDAA;
+    color: #fff;
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;   /* Stack links vertically */
+        align-items: flex-start;
+    }
+    .navbar a {
+        margin: 5px 0;            /* Vertical spacing */
+    }
+}
+
+
+/* Page Heading */
+h1 {
+    text-align: center;
+    color: #1B5E20;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Filter Form Container */
+form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Dropdowns */
+form select {
+    padding: 10px 14px;
+    margin: 8px;
+    border-radius: 8px;
+    border: 1px solid #A5D6A7;
+    font-size: 15px;
+    background-color: #E8F5E9;
+    color: #1B5E20;
+    cursor: pointer;
+}
+
+/* Button */
+form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2E7D32;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Button Hover */
+form button:hover {
+    background-color: #1B5E20;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    form select,
+    form button {
+        width: 90%;
+        margin-top: 10px;
+    }
+}
+
+
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+    <a href="{{ url_for('home') }}">🏠 Home</a>
+    <a href="{{ url_for('display') }}">Workers</a>
+</nav>
+
+<h1 style="text-align:center;">RaithuConnect Workers</h1>
+
+<!-- Filter Form -->
+<form method="GET" style="text-align:center;">
+<select name="work_type">
+    <option value="">All Work Types</option>
+    <option value="Plantation">Plantation</option>
+    <option value="Tractor">Tractor</option>
+    <option value="Harvester">Harvester</option>
+</select>
+
+<select name="availability">
+    <option value="">All Availability</option>
+    <option value="Available">Available</option>
+    <option value="Not Available">Not Available</option>
+</select>
+
+<button type="submit">Filter</button>
+</form>
+
+<!-- Workers List -->
+<div class="worker-category">
+{% for worker in workers %}
+    <div class="worker-card">
+        {% if worker[7] %}<img src="{{ url_for('static', filename='uploads/' + worker[7]) }}" class="avatar" alt="{{ worker[1] }}">{% endif %}
+
+        <p class="name"><a href="{{ url_for('profile', id=worker[0]) }}" style="text-decoration:none; color:inherit;">{{ worker[1] }}</a></p>
+        <p class="name1">{{ worker[2] }}</p>
+        <p>{{ worker[3] }}</p>
+        <p class="name2">{{ worker[5] }}</p>
+
+        <p>{% for i in range(worker[6]) %}⭐{% endfor %}</p>
+
+        <a href="https://wa.me/91{{ worker[4] }}" class="call-btn">💬WhatsApp</a>
+        <a href="tel:{{ worker[4] }}" class="call-btn1">Call📞</a>
+    </div>
+{% endfor %}
+</div>
+
+</body>
+</html>

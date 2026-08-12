@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RaithuConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+ 
+
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<meta name="theme-color" content="#2e7d32">
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: lightgreen;
+    }
+
+    /* HEADER */
+    #header {
+      background-color: greenyellow;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      box-shadow: 0 6px 31px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content-div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+    }
+
+    .logo-container h1 {
+      font-size: 2.5rem;
+      color: rgb(0, 75, 0);
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      padding: 0.5rem 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e23d3d;
+    }
+
+    .nav-link-btn {
+      border: none;
+      font-size: 1rem;
+      border-radius: 0.4rem;
+      padding: 0.5rem 1.2rem;
+      background-color: #3486e4;
+      color: #fafafa;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+
+    .nav-link-btn:hover {
+      background-color: lightgreen;
+    }
+
+    .nav-link-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* HERO */
+    .home-sec {
+      padding: 4rem 2rem;
+      background-color: #e8f5e9;
+      
+      margin-top: 50px;
+      padding: 180px;
+    }
+
+    .content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .eye-grabber h1 {
+      font-size: 2.5rem;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .eye-grabber h2 {
+      font-size: 1.5rem;
+      color: #444;
+      margin: 1rem 0 2rem;
+    }
+
+    .btn {
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.4rem;
+      padding: 1rem 2rem;
+      background-color: #e23d3d;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #f84848;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .image-content img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .logo-container h1 {
+        font-size: 1.8rem;
+      }
+
+      nav {
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+
+      .eye-grabber h1 {
+        font-size: 2rem;
+      }
+
+      .eye-grabber h2 {
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+      }
+    }
+
+
+    form {
+  display: inline-block;
+  margin: 10px;
+}
+
+select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background-color: #e6ffe6;
+  border-color: #45a049;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="header-content-div">
+      <div class="logo-container">
+        <img src="/static/rc_logo.jpg" alt="RaithuConnect Logo">
+        
+      
+      <h1>{{ _('RaithuConnect') }}</h1>
+    </div>
+<nav>
+  <a href="#about">{{ _('Home') }}</a>
+  <a href="/about_us">{{ _('About') }}</a>
+  <a href="/contact_us">{{ _('Contact') }}</a>
+<a href="{{ url_for('sign_in') }}" class="nav-link-btn">
+  {{ _('Login') }}
+</a>
+  <!-- Language switcher -->
+  <form method="get" action="">
+    <select name="lang" onchange="this.form.submit()">
+      <option value="en" {% if request.args.get('lang') == 'en' %}selected{% endif %}>{{ _('English') }}</option>
+      <option value="te" {% if request.args.get('lang') == 'te' %}selected{% endif %}>{{ _('Telugu') }}</option>
+      <option value="hi" {% if request.args.get('lang') == 'hi' %}selected{% endif %}>{{ _('Hindi') }}</option>
+    </select>
+  </form>
+</nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section id="home-sec" class="flexible home-sec">
+      <div class="content-wrapper">
+        <div class="text-content eye-grabber">
+
+<h1>{{ _('Welcome to RaithuConnect') }}</h1>
+<h2>{{ _('Enhancing Agricultural Connectivity with RaithuConnect') }}</h2>
+<a href="{{ url_for('sign_up') }}" class="btn">
+  {{ _('SIGN UP') }}
+</a>        </div>
+        <div class="image-content">
+          <img src="/static/logo_rc.jpg" alt="RaithuConnect Visual">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
+
+
+
+</body>
+</html>

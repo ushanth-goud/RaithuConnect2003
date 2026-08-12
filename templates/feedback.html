@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+    body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #f4f7f9;
+margin: 0;
+padding: 0;
+}
+
+.container.profile-container {
+max-width: 500px;
+margin: 50px auto;
+padding: 30px;
+background-color: #ffffff;
+border-radius: 12px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+h1 {
+color: #2e7d32;
+font-size: 24px;
+margin-bottom: 25px;
+}
+
+.feedback-form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.feedback-form label {
+font-weight: 600;
+text-align: left;
+color: #333;
+}
+
+.feedback-form select,
+.feedback-form textarea {
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 6px;
+font-size: 16px;
+resize: vertical;
+}
+
+.feedback-form textarea {
+min-height: 100px;
+}
+
+button[type="submit"] {
+padding: 10px 15px;
+background-color: #2e7d32;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+background-color: #1b5e20;
+}
+
+.edit-button {
+display: inline-block;
+margin-top: 20px;
+padding: 10px 15px;
+background-color: #1976d2;
+color: white;
+text-decoration: none;
+border-radius: 6px;
+font-size: 16px;
+transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+background-color: #0d47a1;
+}
+
+</style>
+</head>
+<body>
+    <div class="container profile-container">
+        <h1>Submit Feedback for {{ worker.name }}</h1>
+
+        <form method="POST" class="feedback-form" action="{{ url_for('submit_feedback', id=worker.id) }}">
+            <label for="rating">Rating (1 to 5):</label>
+            <select name="rating" required>
+                {% for i in range(1, 6) %}
+                <option value="{{ i }}">{{ i }} Star{% if i > 1 %}s{% endif %}</option>
+                {% endfor %}
+            </select>
+
+            <label for="comment">Your Feedback:</label>
+            <textarea name="comment" placeholder="Write your experience..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <a href="{{ url_for('display', id=worker.id) }}" class="edit-button" style="margin-top: 20px;">Back to Profile</a>
+    </div>
+</body>
+</html>

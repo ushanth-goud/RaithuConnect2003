@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ worker[1] }} - RaithuConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f7f9; margin:0; padding:30px; }
+    .profile { max-width:520px; margin:30px auto; background:white; padding:28px; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.1); text-align:center; }
+    .profile img { width:160px; height:160px; object-fit:cover; border-radius:50%; }
+    .profile h1 { color:#2e7d32; }
+    .profile p { font-size:17px; margin:10px; }
+    .btn { display:inline-block; margin:8px 4px; padding:10px 16px; border-radius:7px; text-decoration:none; color:white; background:#2e7d32; }
+    .btn.blue { background:#1976d2; }
+  </style>
+</head>
+<body>
+  <div class="profile">
+    {% if worker[7] %}
+      <img src="{{ url_for('static', filename='uploads/' + worker[7]) }}" alt="{{ worker[1] }}">
+    {% endif %}
+    <h1>{{ worker[1] }}</h1>
+    <p><strong>Work:</strong> {{ worker[2] }}</p>
+    <p><strong>Location:</strong> {{ worker[3] }}</p>
+    <p><strong>Contact:</strong> {{ worker[4] }}</p>
+    <p><strong>Availability:</strong> {{ worker[5] }}</p>
+    <p><strong>Rating:</strong> {% for i in range(worker[6] or 0) %}⭐{% endfor %}</p>
+    <a class="btn" href="tel:{{ worker[4] }}">📞 Call</a>
+    <a class="btn" href="https://wa.me/91{{ worker[4] }}">💬 WhatsApp</a>
+    <a class="btn blue" href="{{ url_for('submit_feedback', id=worker[0]) }}">⭐ Feedback</a>
+    <br>
+    <a href="{{ url_for('display') }}">← Back to Workers</a>
+  </div>
+</body>
+</html>
