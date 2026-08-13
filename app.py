@@ -137,6 +137,7 @@ def register():
         contact = request.form.get("contact", "").strip()
         availability = request.form.get("availability", "").strip()
         rating = request.form.get("rating", "5").strip()
+        price = request.form.get("price", "0").strip()
 
         if not all([name, work_type, location, contact, availability]):
             flash(_("Please fill in all required fields."), "danger")
@@ -146,6 +147,13 @@ def register():
             rating_value = max(1, min(5, int(rating)))
         except ValueError:
             rating_value = 5
+
+        try:
+            price_value = float(price)
+        if price_value < 0:
+            price_value = 0
+        except ValueError:
+            price_value = 0
 
         filename = None
         image = request.files.get("image")
@@ -163,9 +171,9 @@ def register():
             cursor = db.cursor()
             cursor.execute(
                 """INSERT INTO workers
-                   (name, work_type, location, contact, availability, rating, image_filename)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s)""",
-                (name, work_type, location, contact, availability, rating_value, filename),
+                   (name, work_type, location, contact, availability, rating, image_filename, price)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
+                (name, work_type, location, contact, availability, rating_value, filename, price_value),
             )
             db.commit()
             flash(_("Worker registered successfully!"), "success")
@@ -188,7 +196,7 @@ def display():
     location = request.args.get("location", "").strip()
     availability = request.args.get("availability", "").strip()
 
-    query = "SELECT id, name, work_type, location, contact, availability, rating, image_filename FROM workers WHERE 1=1"
+    query = "SELECT id, name, work_type, location, contact, availability, rating, image_filename, price FROM workers WHERE 1=1"
     params = []
     if work_type:
         query += " AND work_type = %s"
