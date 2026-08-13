@@ -234,7 +234,6 @@ def profile(id):
         cursor = db.cursor()
         cursor.execute("""SELECT id, name, work_type, location, contact,availability, rating, image_filename, price FROM workers WHERE id = %s""",
                        (id,),
-)
         )
         worker = cursor.fetchone()
         if not worker:
