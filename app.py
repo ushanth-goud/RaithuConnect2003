@@ -163,7 +163,7 @@ def register():
             cursor = db.cursor()
             cursor.execute(
                 """INSERT INTO workers
-                   (name, work_type, location, contact, availability, rating, image)
+                   (name, work_type, location, contact, availability, rating, image_filename)
                    VALUES (%s, %s, %s, %s, %s, %s, %s)""",
                 (name, work_type, location, contact, availability, rating_value, filename),
             )
@@ -188,7 +188,7 @@ def display():
     location = request.args.get("location", "").strip()
     availability = request.args.get("availability", "").strip()
 
-    query = "SELECT id, name, work_type, location, contact, availability, rating, image FROM workers WHERE 1=1"
+    query = "SELECT id, name, work_type, location, contact, availability, rating, image_filename FROM workers WHERE 1=1"
     params = []
     if work_type:
         query += " AND work_type = %s"
@@ -225,7 +225,7 @@ def profile(id):
         db = get_db()
         cursor = db.cursor()
         cursor.execute(
-            "SELECT id, name, work_type, location, contact, availability, rating, image FROM workers WHERE id = %s",
+            "SELECT id, name, work_type, location, contact, availability, rating, image_filename FROM workers WHERE id = %s",
             (id,),
         )
         worker = cursor.fetchone()
