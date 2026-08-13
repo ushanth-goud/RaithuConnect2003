@@ -150,8 +150,8 @@ def register():
 
         try:
             price_value = float(price)
-        if price_value < 0:
-            price_value = 0
+            if price_value < 0:
+                price_value = 0
         except ValueError:
             price_value = 0
 
