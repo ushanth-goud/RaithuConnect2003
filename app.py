@@ -232,9 +232,9 @@ def profile(id):
     try:
         db = get_db()
         cursor = db.cursor()
-        cursor.execute(
-            "SELECT id, name, work_type, location, contact, availability, rating, image_filename FROM workers WHERE id = %s",
-            (id,),
+        cursor.execute("""SELECT id, name, work_type, location, contact,availability, rating, image_filename, price FROM workers WHERE id = %s""",
+                       (id,),
+)
         )
         worker = cursor.fetchone()
         if not worker:
