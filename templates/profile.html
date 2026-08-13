@@ -1,36 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ worker[1] }} - RaithuConnect</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <style>
-    body { font-family: Arial, sans-serif; background:#f4f7f9; margin:0; padding:30px; }
-    .profile { max-width:520px; margin:30px auto; background:white; padding:28px; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.1); text-align:center; }
-    .profile img { width:160px; height:160px; object-fit:cover; border-radius:50%; }
-    .profile h1 { color:#2e7d32; }
-    .profile p { font-size:17px; margin:10px; }
-    .btn { display:inline-block; margin:8px 4px; padding:10px 16px; border-radius:7px; text-decoration:none; color:white; background:#2e7d32; }
-    .btn.blue { background:#1976d2; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ worker[1] }} | RaithuConnect</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f8f5;
+            color: #263328;
+        }
+
+        .navbar {
+            background: #116530;
+            min-height: 70px;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        }
+
+        .brand {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .brand span {
+            color: #b9efc3;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: #2e8b57;
+        }
+
+        .profile-wrapper {
+            max-width: 900px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.09);
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #e7f6ea, #f8fff9);
+            padding: 35px;
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .profile-photo {
+            width: 190px;
+            height: 190px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .default-photo {
+            width: 190px;
+            height: 190px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dff2e2;
+            font-size: 85px;
+        }
+
+        .profile-name {
+            font-size: 34px;
+            font-weight: 800;
+            color: #164e27;
+            margin-bottom: 10px;
+        }
+
+        .work-badge {
+            display: inline-block;
+            background: #1f7a45;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .rating {
+            font-size: 18px;
+            font-weight: 700;
+            color: #854d0e;
+        }
+
+        .details {
+            padding: 30px 35px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf1ed;
+            font-size: 16px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            width: 150px;
+            font-weight: 700;
+            color: #536258;
+        }
+
+        .available {
+            color: #16803c;
+            font-weight: 800;
+        }
+
+        .busy {
+            color: #b42318;
+            font-weight: 800;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #14532d;
+        }
+
+        .price-small {
+            font-size: 14px;
+            color: #6b786f;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            text-decoration: none;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .call-btn {
+            background: #e8f5e9;
+            color: #166534;
+        }
+
+        .whatsapp-btn {
+            background: #e8f7ee;
+            color: #128c45;
+        }
+
+        .feedback-btn {
+            display: block;
+            text-align: center;
+            margin-top: 12px;
+            padding: 14px;
+            background: #14532d;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 800;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #14532d;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .detail-label {
+                width: auto;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="profile">
-    {% if worker[7] %}
-      <img src="{{ url_for('static', filename='uploads/' + worker[7]) }}" alt="{{ worker[1] }}">
-    {% endif %}
-    <h1>{{ worker[1] }}</h1>
-    <p><strong>Work:</strong> {{ worker[2] }}</p>
-    <p><strong>Location:</strong> {{ worker[3] }}</p>
-    <p><strong>Contact:</strong> {{ worker[4] }}</p>
-    <p><strong>Availability:</strong> {{ worker[5] }}</p>
-    <p><strong>Rating:</strong> {% for i in range(worker[6] or 0) %}⭐{% endfor %}</p>
-    <a class="btn" href="tel:{{ worker[4] }}">📞 Call</a>
-    <a class="btn" href="https://wa.me/91{{ worker[4] }}">💬 WhatsApp</a>
-    <a class="btn blue" href="{{ url_for('submit_feedback', id=worker[0]) }}">⭐ Feedback</a>
-    <br>
-    <a href="{{ url_for('display') }}">← Back to Workers</a>
-  </div>
+
+<nav class="navbar">
+
+    <a href="{{ url_for('home') }}" class="brand">
+        🌱 Raithu<span>Connect</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">🏠 Home</a>
+        <a href="{{ url_for('display') }}">👨‍🌾 Workers</a>
+    </div>
+
+</nav>
+
+
+<div class="profile-wrapper">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            {% if worker[7] %}
+
+                <img
+                    src="{{ url_for('static', filename='uploads/' + worker[7]) }}"
+                    alt="{{ worker[1] }}"
+                    class="profile-photo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+
+                <div class="default-photo" style="display:none;">
+                    👨‍🌾
+                </div>
+
+            {% else %}
+
+                <div class="default-photo">
+                    👨‍🌾
+                </div>
+
+            {% endif %}
+
+
+            <div>
+
+                <div class="profile-name">
+                    {{ worker[1] }}
+                </div>
+
+                <div class="work-badge">
+                    🛠️ {{ worker[2] }}
+                </div>
+
+                <div class="rating">
+                    ⭐ {{ worker[6] }}/5
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="details">
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    📍 Location
+                </div>
+
+                <div>
+                    {{ worker[3] }}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    📞 Contact
+                </div>
+
+                <div>
+                    {{ worker[4] }}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Availability
+                </div>
+
+                {% if worker[5] == "Available" %}
+
+                    <div class="available">
+                        🟢 Available
+                    </div>
+
+                {% else %}
+
+                    <div class="busy">
+                        🔴 Busy
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    💰 Service Price
+                </div>
+
+                <div class="price">
+                    ₹{{ "%.0f"|format(worker[8] or 0) }}
+                    <span class="price-small">/ day</span>
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a
+                    href="tel:{{ worker[4] }}"
+                    class="action-btn call-btn"
+                >
+                    📞 Call Worker
+                </a>
+
+
+                <a
+                    href="https://wa.me/91{{ worker[4] }}"
+                    target="_blank"
+                    class="action-btn whatsapp-btn"
+                >
+                    💬 WhatsApp
+                </a>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('submit_feedback', id=worker[0]) }}"
+                class="feedback-btn"
+            >
+                ⭐ Give Feedback
+            </a>
+
+
+            <a
+                href="{{ url_for('display') }}"
+                class="back-btn"
+            >
+                ← Back to Workers
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
