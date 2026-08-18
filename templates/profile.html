@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ worker[1] }} | RaithuConnect</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -25,7 +27,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
         }
 
         .brand {
@@ -77,19 +78,19 @@
             align-items: center;
         }
 
-        .profile-photo {
-            width: 190px;
-            height: 190px;
-            border-radius: 18px;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-        }
-
+        .profile-photo,
         .default-photo {
             width: 190px;
             height: 190px;
             border-radius: 18px;
+        }
+
+        .profile-photo {
+            object-fit: cover;
+            border: 5px solid white;
+        }
+
+        .default-photo {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -116,8 +117,8 @@
         }
 
         .rating {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 19px;
+            font-weight: 800;
             color: #854d0e;
         }
 
@@ -132,10 +133,6 @@
             padding: 14px 0;
             border-bottom: 1px solid #edf1ed;
             font-size: 16px;
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
         }
 
         .detail-label {
@@ -178,7 +175,6 @@
             padding: 14px;
             border-radius: 10px;
             font-weight: 800;
-            font-size: 15px;
         }
 
         .call-btn {
@@ -201,6 +197,47 @@
             text-decoration: none;
             border-radius: 10px;
             font-weight: 800;
+        }
+
+        .reviews-section {
+            margin-top: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .reviews-title {
+            color: #164e27;
+            margin-bottom: 20px;
+        }
+
+        .review {
+            padding: 18px 0;
+            border-bottom: 1px solid #edf1ed;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-rating {
+            color: #f59e0b;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .review-comment {
+            color: #536258;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .no-reviews {
+            color: #758177;
+            text-align: center;
+            padding: 20px 0;
         }
 
         .back-btn {
@@ -231,7 +268,6 @@
             .detail-row {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 4px;
             }
 
             .detail-label {
@@ -242,12 +278,12 @@
                 grid-template-columns: 1fr;
             }
         }
+
     </style>
+
 </head>
 
 <body>
-
-<!-- ================= NAVBAR ================= -->
 
 <nav class="navbar">
 
@@ -257,20 +293,13 @@
 
     <div class="nav-links">
 
-        <a href="{{ url_for('home') }}">
-            🏠 Home
-        </a>
+        <a href="{{ url_for('home') }}">🏠 Home</a>
 
-        <a href="{{ url_for('display') }}">
-            👨‍🌾 Workers
-        </a>
+        <a href="{{ url_for('display') }}">👨‍🌾 Workers</a>
 
     </div>
 
 </nav>
-
-
-<!-- ================= PROFILE ================= -->
 
 <div class="profile-wrapper">
 
@@ -278,54 +307,35 @@
 
         <div class="profile-header">
 
-            <!-- ================= WORKER IMAGE ================= -->
+            {% if worker[8] %}
 
-            {% if worker[7] %}
-
-                {% if worker[7].startswith('http://') or worker[7].startswith('https://') %}
-
-                    <!-- Cloudinary Image -->
+                {% if worker[8].startswith('http://') or worker[8].startswith('https://') %}
 
                     <img
-                        src="{{ worker[7] }}"
+                        src="{{ worker[8] }}"
                         alt="{{ worker[1] }}"
                         class="profile-photo"
                         loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                     >
 
                 {% else %}
 
-                    <!-- Old Local Image -->
-
                     <img
-                        src="{{ url_for('static', filename='uploads/' + worker[7]) }}"
+                        src="{{ url_for('static', filename='uploads/' + worker[8]) }}"
                         alt="{{ worker[1] }}"
                         class="profile-photo"
                         loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                     >
 
                 {% endif %}
 
-                <!-- Default image if loading fails -->
-
-                <div class="default-photo" style="display:none;">
-                    👨‍🌾
-                </div>
-
             {% else %}
-
-                <!-- No image -->
 
                 <div class="default-photo">
                     👨‍🌾
                 </div>
 
             {% endif %}
-
-
-            <!-- ================= WORKER BASIC INFO ================= -->
 
             <div>
 
@@ -338,19 +348,25 @@
                 </div>
 
                 <div class="rating">
-                    ⭐ {{ worker[6] }}/5
+
+                    {% if worker[7] > 0 %}
+
+                        ⭐ {{ "%.1f"|format(worker[6]) }}/5
+                        — {{ worker[7] }} review{% if worker[7] != 1 %}s{% endif %}
+
+                    {% else %}
+
+                        ⭐ No reviews yet
+
+                    {% endif %}
+
                 </div>
 
             </div>
 
         </div>
 
-
-        <!-- ================= DETAILS ================= -->
-
         <div class="details">
-
-            <!-- Location -->
 
             <div class="detail-row">
 
@@ -364,9 +380,6 @@
 
             </div>
 
-
-            <!-- Contact -->
-
             <div class="detail-row">
 
                 <div class="detail-label">
@@ -378,9 +391,6 @@
                 </div>
 
             </div>
-
-
-            <!-- Availability -->
 
             <div class="detail-row">
 
@@ -404,9 +414,6 @@
 
             </div>
 
-
-            <!-- Price -->
-
             <div class="detail-row">
 
                 <div class="detail-label">
@@ -415,7 +422,7 @@
 
                 <div class="price">
 
-                    ₹{{ "%.0f"|format(worker[8] or 0) }}
+                    ₹{{ "%.0f"|format(worker[9] or 0) }}
 
                     <span class="price-small">
                         / day
@@ -425,9 +432,6 @@
 
             </div>
 
-
-            <!-- ================= ACTION BUTTONS ================= -->
-
             <div class="actions">
 
                 <a
@@ -436,7 +440,6 @@
                 >
                     📞 Call Worker
                 </a>
-
 
                 <a
                     href="https://wa.me/91{{ worker[4] }}"
@@ -449,29 +452,73 @@
 
             </div>
 
-
-            <!-- ================= FEEDBACK ================= -->
-
             <a
                 href="{{ url_for('submit_feedback', id=worker[0]) }}"
                 class="feedback-btn"
             >
-                ⭐ Give Feedback
-            </a>
-
-
-            <!-- ================= BACK ================= -->
-
-            <a
-                href="{{ url_for('display') }}"
-                class="back-btn"
-            >
-                ← Back to Workers
+                ⭐ Give Rating & Review
             </a>
 
         </div>
 
     </div>
+
+
+    <!-- ================= REVIEWS ================= -->
+
+    <div class="reviews-section">
+
+        <h2 class="reviews-title">
+            ⭐ Customer Reviews
+        </h2>
+
+        {% if reviews %}
+
+            {% for review in reviews %}
+
+                <div class="review">
+
+                    <div class="review-rating">
+
+                        {% for i in range(1, 6) %}
+
+                            {% if i <= review[0] %}
+                                ★
+                            {% else %}
+                                ☆
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {{ review[0] }}/5
+
+                    </div>
+
+                    <div class="review-comment">
+                        "{{ review[1] }}"
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="no-reviews">
+                No reviews yet. Be the first person to review this worker!
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <a
+        href="{{ url_for('display') }}"
+        class="back-btn"
+    >
+        ← Back to Workers
+    </a>
 
 </div>
 
