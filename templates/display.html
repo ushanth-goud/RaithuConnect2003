@@ -19,6 +19,8 @@
             color: #263328;
         }
 
+        /* ================= NAVBAR ================= */
+
         .navbar {
             background: #116530;
             min-height: 70px;
@@ -51,12 +53,15 @@
             padding: 10px 16px;
             border-radius: 8px;
             font-weight: 600;
+            transition: 0.25s;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             background: #2e8b57;
         }
+
+        /* ================= HERO ================= */
 
         .hero {
             background: linear-gradient(135deg, #e8f7eb, #f7fff8);
@@ -78,6 +83,8 @@
             margin: auto;
         }
 
+        /* ================= FLASH ================= */
+
         .flash-message {
             max-width: 900px;
             margin: 20px auto;
@@ -98,6 +105,8 @@
             color: #991b1b;
             border: 1px solid #ffc4c4;
         }
+
+        /* ================= FILTER ================= */
 
         .filter-wrapper {
             max-width: 1200px;
@@ -135,6 +144,11 @@
             outline: none;
         }
 
+        .filter-group select:focus,
+        .filter-group input:focus {
+            border-color: #2e8b57;
+        }
+
         .filter-btn {
             border: none;
             background: #1f7a45;
@@ -144,7 +158,15 @@
             cursor: pointer;
             font-weight: 700;
             font-size: 14px;
+            transition: 0.25s;
         }
+
+        .filter-btn:hover {
+            background: #14532d;
+            transform: translateY(-1px);
+        }
+
+        /* ================= WORKERS ================= */
 
         .workers-wrapper {
             max-width: 1200px;
@@ -179,6 +201,8 @@
             gap: 22px;
         }
 
+        /* ================= CARD ================= */
+
         .worker-card {
             background: white;
             border: 1px solid #e0e9e1;
@@ -186,6 +210,7 @@
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(0,0,0,0.07);
             transition: 0.3s ease;
+            position: relative;
         }
 
         .worker-card:hover {
@@ -216,6 +241,8 @@
             background: #e8f5e9;
         }
 
+        /* ================= AVAILABILITY ================= */
+
         .availability {
             position: absolute;
             top: 12px;
@@ -235,6 +262,8 @@
             background: #b42318;
         }
 
+        /* ================= RATING ================= */
+
         .rating-badge {
             position: absolute;
             bottom: 12px;
@@ -247,6 +276,8 @@
             color: #854d0e;
             box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
+
+        /* ================= CONTENT ================= */
 
         .worker-content {
             padding: 18px;
@@ -262,6 +293,10 @@
         .worker-name a {
             color: inherit;
             text-decoration: none;
+        }
+
+        .worker-name a:hover {
+            color: #1f7a45;
         }
 
         .work-type {
@@ -294,7 +329,10 @@
         .price small {
             font-size: 13px;
             color: #708074;
+            font-weight: 600;
         }
+
+        /* ================= BUTTONS ================= */
 
         .action-row {
             display: grid;
@@ -310,6 +348,7 @@
             border-radius: 9px;
             font-size: 13px;
             font-weight: 800;
+            transition: 0.2s;
         }
 
         .call-btn {
@@ -317,9 +356,17 @@
             color: #166534;
         }
 
+        .call-btn:hover {
+            background: #c8e6c9;
+        }
+
         .whatsapp-btn {
             background: #e8f7ee;
             color: #128c45;
+        }
+
+        .whatsapp-btn:hover {
+            background: #c7efd4;
         }
 
         .profile-btn {
@@ -333,19 +380,38 @@
             color: white;
             font-weight: 800;
             font-size: 13px;
+            transition: 0.2s;
         }
+
+        .profile-btn:hover {
+            background: #0b3d20;
+        }
+
+        /* ================= EMPTY ================= */
 
         .empty-state {
             background: white;
             padding: 55px 20px;
             border-radius: 16px;
             text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
         }
 
         .empty-state .icon {
             font-size: 55px;
             margin-bottom: 10px;
         }
+
+        .empty-state h3 {
+            color: #264d31;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #758177;
+        }
+
+        /* ================= FOOTER ================= */
 
         footer {
             background: #103d20;
@@ -355,7 +421,10 @@
             font-size: 14px;
         }
 
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 1050px) {
+
             .worker-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -366,6 +435,7 @@
         }
 
         @media (max-width: 750px) {
+
             .navbar {
                 flex-direction: column;
                 gap: 12px;
@@ -386,6 +456,7 @@
         }
 
         @media (max-width: 500px) {
+
             .worker-grid {
                 grid-template-columns: 1fr;
             }
@@ -405,6 +476,8 @@
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <nav class="navbar">
 
     <a href="{{ url_for('home') }}" class="brand">
@@ -412,23 +485,40 @@
     </a>
 
     <div class="nav-links">
-        <a href="{{ url_for('homepage') }}">🏠 Home</a>
-        <a href="{{ url_for('display') }}" class="active">👨‍🌾 Workers</a>
+
+        <a href="{{ url_for('homepage') }}">
+            🏠 Home
+        </a>
+
+        <a href="{{ url_for('display') }}" class="active">
+            👨‍🌾 Workers
+        </a>
+
     </div>
 
 </nav>
 
+
+<!-- ================= FLASH MESSAGES ================= -->
+
 {% with messages = get_flashed_messages(with_categories=true) %}
 
     {% if messages %}
+
         {% for category, message in messages %}
+
             <div class="flash-message {{ category }}">
                 {{ message }}
             </div>
+
         {% endfor %}
+
     {% endif %}
 
 {% endwith %}
+
+
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -440,6 +530,9 @@
     </p>
 
 </section>
+
+
+<!-- ================= FILTER ================= -->
 
 <div class="filter-wrapper">
 
@@ -453,19 +546,55 @@
 
                 <option value="">All Work Types</option>
 
-                <option value="Plantation" {% if request.args.get('work_type') == 'Plantation' %}selected{% endif %}>Plantation</option>
-                <option value="Tractor" {% if request.args.get('work_type') == 'Tractor' %}selected{% endif %}>Tractor</option>
-                <option value="Harvester" {% if request.args.get('work_type') == 'Harvester' %}selected{% endif %}>Harvester</option>
-                <option value="Drone" {% if request.args.get('work_type') == 'Drone' %}selected{% endif %}>Drone</option>
-                <option value="JCB" {% if request.args.get('work_type') == 'JCB' %}selected{% endif %}>JCB</option>
-                <option value="Sprayer" {% if request.args.get('work_type') == 'Sprayer' %}selected{% endif %}>Sprayer</option>
-                <option value="Weeding" {% if request.args.get('work_type') == 'Weeding' %}selected{% endif %}>Weeding</option>
-                <option value="Borewell" {% if request.args.get('work_type') == 'Borewell' %}selected{% endif %}>Borewell</option>
-                <option value="Agrochemicals" {% if request.args.get('work_type') == 'Agrochemicals' %}selected{% endif %}>Agrochemicals</option>
+                <option value="Plantation"
+                    {% if request.args.get('work_type') == 'Plantation' %}selected{% endif %}>
+                    Plantation
+                </option>
+
+                <option value="Tractor"
+                    {% if request.args.get('work_type') == 'Tractor' %}selected{% endif %}>
+                    Tractor
+                </option>
+
+                <option value="Harvester"
+                    {% if request.args.get('work_type') == 'Harvester' %}selected{% endif %}>
+                    Harvester
+                </option>
+
+                <option value="Drone"
+                    {% if request.args.get('work_type') == 'Drone' %}selected{% endif %}>
+                    Drone
+                </option>
+
+                <option value="JCB"
+                    {% if request.args.get('work_type') == 'JCB' %}selected{% endif %}>
+                    JCB
+                </option>
+
+                <option value="Sprayer"
+                    {% if request.args.get('work_type') == 'Sprayer' %}selected{% endif %}>
+                    Sprayer
+                </option>
+
+                <option value="Weeding"
+                    {% if request.args.get('work_type') == 'Weeding' %}selected{% endif %}>
+                    Weeding
+                </option>
+
+                <option value="Borewell"
+                    {% if request.args.get('work_type') == 'Borewell' %}selected{% endif %}>
+                    Borewell
+                </option>
+
+                <option value="Agrochemicals"
+                    {% if request.args.get('work_type') == 'Agrochemicals' %}selected{% endif %}>
+                    Agrochemicals
+                </option>
 
             </select>
 
         </div>
+
 
         <div class="filter-group">
 
@@ -480,6 +609,7 @@
 
         </div>
 
+
         <div class="filter-group">
 
             <label>🟢 Availability</label>
@@ -488,17 +618,20 @@
 
                 <option value="">All Availability</option>
 
-                <option value="Available" {% if request.args.get('availability') == 'Available' %}selected{% endif %}>
+                <option value="Available"
+                    {% if request.args.get('availability') == 'Available' %}selected{% endif %}>
                     Available
                 </option>
 
-                <option value="Not Available" {% if request.args.get('availability') == 'Not Available' %}selected{% endif %}>
+                <option value="Not Available"
+                    {% if request.args.get('availability') == 'Not Available' %}selected{% endif %}>
                     Not Available
                 </option>
 
             </select>
 
         </div>
+
 
         <button type="submit" class="filter-btn">
             🔎 Search Workers
@@ -508,17 +641,23 @@
 
 </div>
 
+
+<!-- ================= WORKERS ================= -->
+
 <section class="workers-wrapper">
 
     <div class="section-heading">
 
-        <h2>Available Agricultural Workers</h2>
+        <h2>
+            Available Agricultural Workers
+        </h2>
 
         <div class="worker-count">
             {{ workers|length }} Workers Found
         </div>
 
     </div>
+
 
     {% if workers %}
 
@@ -528,14 +667,16 @@
 
                 <div class="worker-card">
 
+                    <!-- ================= IMAGE ================= -->
+
                     <div class="worker-image-wrapper">
 
-                        {% if worker[8] %}
+                        {% if worker[7] %}
 
-                            {% if worker[8].startswith('http://') or worker[8].startswith('https://') %}
+                            {% if worker[7].startswith('http://') or worker[7].startswith('https://') %}
 
                                 <img
-                                    src="{{ worker[8] }}"
+                                    src="{{ worker[7] }}"
                                     class="worker-image"
                                     alt="{{ worker[1] }}"
                                     loading="lazy"
@@ -545,7 +686,7 @@
                             {% else %}
 
                                 <img
-                                    src="{{ url_for('static', filename='uploads/' + worker[8]) }}"
+                                    src="{{ url_for('static', filename='uploads/' + worker[7]) }}"
                                     class="worker-image"
                                     alt="{{ worker[1] }}"
                                     loading="lazy"
@@ -566,6 +707,9 @@
 
                         {% endif %}
 
+
+                        <!-- ================= AVAILABILITY ================= -->
+
                         {% if worker[5] == "Available" %}
 
                             <div class="availability available">
@@ -580,12 +724,18 @@
 
                         {% endif %}
 
+
+                        <!-- ================= RATING ================= -->
+
                         <div class="rating-badge">
 
-                            {% if worker[7] > 0 %}
+                            {% if worker[6] and worker[6] > 0 %}
 
                                 ⭐ {{ "%.1f"|format(worker[6]) }}/5
-                                ({{ worker[7] }})
+
+                                {% if worker[9] %}
+                                    ({{ worker[9] }} reviews)
+                                {% endif %}
 
                             {% else %}
 
@@ -597,6 +747,9 @@
 
                     </div>
 
+
+                    <!-- ================= CONTENT ================= -->
+
                     <div class="worker-content">
 
                         <div class="worker-name">
@@ -607,9 +760,11 @@
 
                         </div>
 
+
                         <div class="work-type">
                             🛠️ {{ worker[2] }}
                         </div>
+
 
                         <div class="worker-info">
 
@@ -623,13 +778,19 @@
 
                         </div>
 
+
+                        <!-- ================= PRICE ================= -->
+
                         <div class="price">
 
-                            ₹{{ "%.0f"|format(worker[9] or 0) }}
+                            ₹{{ "%.0f"|format(worker[8] or 0) }}
 
                             <small>/ day</small>
 
                         </div>
+
+
+                        <!-- ================= ACTIONS ================= -->
 
                         <div class="action-row">
 
@@ -639,6 +800,7 @@
                             >
                                 📞 Call
                             </a>
+
 
                             <a
                                 href="https://wa.me/91{{ worker[4] }}"
@@ -650,6 +812,7 @@
                             </a>
 
                         </div>
+
 
                         <a
                             href="{{ url_for('profile', id=worker[0]) }}"
@@ -685,6 +848,9 @@
     {% endif %}
 
 </section>
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
