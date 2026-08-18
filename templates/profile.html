@@ -28,7 +28,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
         }
 
         .brand {
@@ -90,7 +89,6 @@
         .profile-photo {
             object-fit: cover;
             border: 5px solid white;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
         }
 
         .default-photo {
@@ -136,10 +134,6 @@
             padding: 14px 0;
             border-bottom: 1px solid #edf1ed;
             font-size: 16px;
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
         }
 
         .detail-label {
@@ -204,10 +198,6 @@
             text-decoration: none;
             border-radius: 10px;
             font-weight: 800;
-        }
-
-        .feedback-btn:hover {
-            background: #0f3f23;
         }
 
         .reviews-section {
@@ -279,7 +269,6 @@
             .detail-row {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 4px;
             }
 
             .detail-label {
@@ -290,20 +279,15 @@
                 grid-template-columns: 1fr;
             }
 
-            .reviews-section {
-                padding: 20px;
-            }
-
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-
-<!-- ================= NAVBAR ================= -->
 
 <nav class="navbar">
 
@@ -326,50 +310,43 @@
 </nav>
 
 
-<!-- ================= PROFILE ================= -->
-
 <div class="profile-wrapper">
 
+
     <div class="profile-card">
+
+
+        <!-- ================= PROFILE HEADER ================= -->
 
         <div class="profile-header">
 
 
-            <!-- ================= WORKER IMAGE ================= -->
+            {% set image_value = worker[8]|string %}
 
-            <!-- worker[9] = IMAGE -->
 
-            {% if worker[9] %}
+            {% if image_value and image_value != 'None' and image_value != 'null' %}
 
-                {% if worker[9].startswith('http://') or worker[9].startswith('https://') %}
+
+                {% if image_value.startswith('http://') or image_value.startswith('https://') %}
 
                     <img
-                        src="{{ worker[9] }}"
+                        src="{{ image_value }}"
                         alt="{{ worker[1] }}"
                         class="profile-photo"
                         loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                     >
-
-                    <div class="default-photo" style="display:none;">
-                        👨‍🌾
-                    </div>
 
                 {% else %}
 
                     <img
-                        src="{{ url_for('static', filename='uploads/' + worker[9]) }}"
+                        src="{{ url_for('static', filename='uploads/' ~ image_value) }}"
                         alt="{{ worker[1] }}"
                         class="profile-photo"
                         loading="lazy"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                     >
 
-                    <div class="default-photo" style="display:none;">
-                        👨‍🌾
-                    </div>
-
                 {% endif %}
+
 
             {% else %}
 
@@ -380,29 +357,31 @@
             {% endif %}
 
 
-            <!-- ================= BASIC INFO ================= -->
-
             <div>
+
 
                 <div class="profile-name">
                     {{ worker[1] }}
                 </div>
+
 
                 <div class="work-badge">
                     🛠️ {{ worker[2] }}
                 </div>
 
 
-                <!-- worker[6] = average rating -->
-                <!-- worker[7] = review count -->
+                {% set review_count = worker[7]|int %}
+                {% set rating_value = worker[6]|float %}
+
 
                 <div class="rating">
 
-                    {% if worker[7] > 0 %}
+                    {% if review_count > 0 %}
 
-                        ⭐ {{ "%.1f"|format(worker[6]) }}/5
-                        — {{ worker[7] }}
-                        review{% if worker[7] != 1 %}s{% endif %}
+                        ⭐ {{ "%.1f"|format(rating_value) }}/5
+
+                        — {{ review_count }}
+                        review{% if review_count != 1 %}s{% endif %}
 
                     {% else %}
 
@@ -411,6 +390,7 @@
                     {% endif %}
 
                 </div>
+
 
             </div>
 
@@ -421,8 +401,6 @@
 
         <div class="details">
 
-
-            <!-- Location -->
 
             <div class="detail-row">
 
@@ -437,8 +415,6 @@
             </div>
 
 
-            <!-- Contact -->
-
             <div class="detail-row">
 
                 <div class="detail-label">
@@ -452,15 +428,14 @@
             </div>
 
 
-            <!-- Availability -->
-
             <div class="detail-row">
 
                 <div class="detail-label">
                     Availability
                 </div>
 
-                {% if worker[5] == "Available" %}
+
+                {% if worker[5]|string|lower == "available" %}
 
                     <div class="available">
                         🟢 Available
@@ -474,12 +449,11 @@
 
                 {% endif %}
 
+
             </div>
 
 
-            <!-- Price -->
-
-            <!-- worker[8] = PRICE -->
+            <!-- PRICE -->
 
             <div class="detail-row">
 
@@ -487,9 +461,11 @@
                     💰 Service Price
                 </div>
 
+                {% set worker_price = worker[9]|float %}
+
                 <div class="price">
 
-                    ₹{{ "%.0f"|format(worker[8] or 0) }}
+                    ₹{{ "%.0f"|format(worker_price) }}
 
                     <span class="price-small">
                         / day
@@ -500,9 +476,10 @@
             </div>
 
 
-            <!-- ================= ACTION BUTTONS ================= -->
+            <!-- ACTION BUTTONS -->
 
             <div class="actions">
+
 
                 <a
                     href="tel:{{ worker[4] }}"
@@ -521,10 +498,11 @@
                     💬 WhatsApp
                 </a>
 
+
             </div>
 
 
-            <!-- ================= FEEDBACK ================= -->
+            <!-- FEEDBACK -->
 
             <a
                 href="{{ url_for('submit_feedback', id=worker[0]) }}"
@@ -532,6 +510,7 @@
             >
                 ⭐ Give Rating & Review
             </a>
+
 
         </div>
 
@@ -542,6 +521,7 @@
 
     <div class="reviews-section">
 
+
         <h2 class="reviews-title">
             ⭐ Customer Reviews
         </h2>
@@ -549,16 +529,22 @@
 
         {% if reviews %}
 
+
             {% for review in reviews %}
+
 
                 <div class="review">
 
 
+                    {% set review_rating = review[0]|int %}
+
+
                     <div class="review-rating">
+
 
                         {% for i in range(1, 6) %}
 
-                            {% if i <= review[0] %}
+                            {% if i <= review_rating %}
                                 ★
                             {% else %}
                                 ☆
@@ -566,22 +552,28 @@
 
                         {% endfor %}
 
-                        {{ review[0] }}/5
+
+                        {{ review_rating }}/5
+
 
                     </div>
 
 
                     <div class="review-comment">
+
                         "{{ review[1] }}"
+
                     </div>
 
 
                 </div>
 
+
             {% endfor %}
 
 
         {% else %}
+
 
             <div class="no-reviews">
 
@@ -590,12 +582,14 @@
 
             </div>
 
+
         {% endif %}
+
 
     </div>
 
 
-    <!-- ================= BACK ================= -->
+    <!-- BACK -->
 
     <a
         href="{{ url_for('display') }}"
@@ -604,8 +598,10 @@
         ← Back to Workers
     </a>
 
+
 </div>
 
 
 </body>
+
 </html>
