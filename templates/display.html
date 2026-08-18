@@ -21,6 +21,8 @@
             color: #263328;
         }
 
+        /* ================= NAVBAR ================= */
+
         .navbar {
             background: #116530;
             min-height: 70px;
@@ -58,6 +60,8 @@
             background: #2e8b57;
         }
 
+        /* ================= PAGE ================= */
+
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -66,7 +70,7 @@
 
         .page-title {
             text-align: center;
-            color: #164e27;
+            color: #14532d;
             font-size: 34px;
             margin-bottom: 10px;
         }
@@ -77,56 +81,50 @@
             margin-bottom: 30px;
         }
 
+        /* ================= FILTER ================= */
+
         .filter-box {
             background: white;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
             margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
         }
 
         .filter-form {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
             gap: 12px;
-            flex-wrap: wrap;
         }
 
-        .filter-form select,
-        .filter-form input {
-            flex: 1;
-            min-width: 200px;
+        .filter-form input,
+        .filter-form select {
+            width: 100%;
             padding: 12px;
-            border: 1px solid #d5dfd7;
+            border: 1px solid #d7e1d9;
             border-radius: 8px;
             font-size: 15px;
         }
 
         .filter-btn {
-            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
-            background: #116530;
+            background: #14532d;
             color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
         }
 
         .filter-btn:hover {
-            background: #0d4e25;
+            background: #116530;
         }
 
-        .clear-btn {
-            padding: 12px 20px;
-            border-radius: 8px;
-            background: #edf2ee;
-            color: #245332;
-            text-decoration: none;
-            font-weight: 700;
-        }
+        /* ================= WORKER GRID ================= */
 
         .workers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
@@ -135,7 +133,7 @@
             border-radius: 18px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: 0.25s ease;
         }
 
         .worker-card:hover {
@@ -143,23 +141,26 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.12);
         }
 
-        .worker-image-container {
-            height: 220px;
+        /* ================= IMAGE ================= */
+
+        .worker-image {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .default-image {
+            width: 100%;
+            height: 230px;
             background: #dff2e2;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .worker-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .default-image {
             font-size: 90px;
         }
+
+        /* ================= CARD CONTENT ================= */
 
         .worker-content {
             padding: 22px;
@@ -172,63 +173,62 @@
             margin-bottom: 8px;
         }
 
-        .work-type {
+        .work-badge {
             display: inline-block;
-            background: #e4f4e7;
-            color: #176334;
-            padding: 6px 10px;
+            background: #1f7a45;
+            color: white;
+            padding: 7px 12px;
             border-radius: 7px;
             font-size: 13px;
             font-weight: 700;
             margin-bottom: 15px;
         }
 
-        .worker-detail {
-            display: flex;
-            gap: 8px;
-            margin: 10px 0;
+        .detail {
+            margin: 9px 0;
             color: #536258;
             font-size: 15px;
         }
 
-        .detail-icon {
-            min-width: 20px;
+        .detail strong {
+            color: #263328;
         }
 
-        .availability {
+        /* ================= RATING ================= */
+
+        .rating {
             margin-top: 12px;
             font-weight: 800;
-        }
-
-        .available {
-            color: #16803c;
-        }
-
-        .busy {
-            color: #b42318;
-        }
-
-        .rating-box {
-            margin-top: 12px;
-            padding: 10px;
-            background: #fff9e8;
-            border-radius: 8px;
             color: #854d0e;
-            font-weight: 700;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 18px;
         }
 
         .no-rating {
             color: #758177;
+            font-weight: 600;
         }
 
-        .price-box {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #edf1ed;
+        /* ================= AVAILABILITY ================= */
+
+        .available {
+            color: #16803c;
+            font-weight: 800;
         }
+
+        .busy {
+            color: #b42318;
+            font-weight: 800;
+        }
+
+        /* ================= PRICE ================= */
 
         .price {
-            font-size: 26px;
+            margin-top: 15px;
+            font-size: 25px;
             font-weight: 800;
             color: #14532d;
         }
@@ -236,38 +236,61 @@
         .price-small {
             font-size: 13px;
             color: #6b786f;
+            font-weight: 500;
         }
 
-        .view-profile-btn {
+        /* ================= BUTTON ================= */
+
+        .profile-btn {
             display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 18px;
-            padding: 13px;
+            text-decoration: none;
             background: #14532d;
             color: white;
-            text-decoration: none;
+            padding: 13px;
             border-radius: 9px;
+            margin-top: 18px;
             font-weight: 800;
         }
 
-        .view-profile-btn:hover {
-            background: #0d3d20;
+        .profile-btn:hover {
+            background: #116530;
         }
+
+        /* ================= EMPTY ================= */
 
         .empty-box {
             background: white;
-            border-radius: 15px;
             padding: 50px 20px;
+            border-radius: 18px;
             text-align: center;
-            color: #68756c;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
 
         .empty-box h2 {
-            color: #164e27;
+            color: #14532d;
         }
 
-        @media (max-width: 700px) {
+        .empty-box p {
+            color: #68756c;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .workers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
 
             .navbar {
                 flex-direction: column;
@@ -280,17 +303,16 @@
                 justify-content: center;
             }
 
-            .page-title {
-                font-size: 28px;
+            .workers-grid {
+                grid-template-columns: 1fr;
             }
 
             .filter-form {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
 
-            .filter-form select,
-            .filter-form input {
-                width: 100%;
+            .page-title {
+                font-size: 28px;
             }
 
         }
@@ -300,6 +322,8 @@
 </head>
 
 <body>
+
+<!-- ================= NAVBAR ================= -->
 
 <nav class="navbar">
 
@@ -313,14 +337,20 @@
             🏠 Home
         </a>
 
-        <a href="{{ url_for('display') }}">
-            👨‍🌾 Workers
+        <a href="{{ url_for('homepage') }}">
+            📋 Dashboard
+        </a>
+
+        <a href="{{ url_for('register') }}">
+            ➕ Register Worker
         </a>
 
     </div>
 
 </nav>
 
+
+<!-- ================= MAIN ================= -->
 
 <div class="container">
 
@@ -329,15 +359,19 @@
     </h1>
 
     <p class="page-subtitle">
-        Find trusted workers for your agricultural needs
+        Find trusted agricultural workers near you
     </p>
 
 
-    <!-- FILTER -->
+    <!-- ================= FILTER ================= -->
 
     <div class="filter-box">
 
-        <form method="GET" action="{{ url_for('display') }}" class="filter-form">
+        <form
+            method="GET"
+            action="{{ url_for('display') }}"
+            class="filter-form"
+        >
 
             <select name="work_type">
 
@@ -345,38 +379,31 @@
                     All Work Types
                 </option>
 
-                <option value="Plantation"
-                    {% if request.args.get('work_type') == 'Plantation' %}selected{% endif %}>
+                <option value="Plantation">
                     Plantation
                 </option>
 
-                <option value="Tractor"
-                    {% if request.args.get('work_type') == 'Tractor' %}selected{% endif %}>
+                <option value="Tractor">
                     Tractor
                 </option>
 
-                <option value="Harvester"
-                    {% if request.args.get('work_type') == 'Harvester' %}selected{% endif %}>
+                <option value="Harvester">
                     Harvester
                 </option>
 
-                <option value="Drone Workers"
-                    {% if request.args.get('work_type') == 'Drone Workers' %}selected{% endif %}>
+                <option value="Drone Workers">
                     Drone Workers
                 </option>
 
-                <option value="JCB Workers"
-                    {% if request.args.get('work_type') == 'JCB Workers' %}selected{% endif %}>
+                <option value="JCB Workers">
                     JCB Workers
                 </option>
 
-                <option value="Sprayer Workers"
-                    {% if request.args.get('work_type') == 'Sprayer Workers' %}selected{% endif %}>
+                <option value="Sprayer Workers">
                     Sprayer Workers
                 </option>
 
-                <option value="Weeding"
-                    {% if request.args.get('work_type') == 'Weeding' %}selected{% endif %}>
+                <option value="Weeding">
                     Weeding
                 </option>
 
@@ -386,26 +413,41 @@
             <input
                 type="text"
                 name="location"
-                placeholder="Search by location"
+                placeholder="Enter location"
                 value="{{ request.args.get('location', '') }}"
             >
 
 
-            <button type="submit" class="filter-btn">
+            <select name="availability">
+
+                <option value="">
+                    All Availability
+                </option>
+
+                <option value="Available">
+                    Available
+                </option>
+
+                <option value="Busy">
+                    Busy
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="filter-btn"
+            >
                 🔍 Search
             </button>
-
-
-            <a href="{{ url_for('display') }}" class="clear-btn">
-                Clear
-            </a>
 
         </form>
 
     </div>
 
 
-    <!-- WORKERS -->
+    <!-- ================= WORKERS ================= -->
 
     {% if workers %}
 
@@ -416,87 +458,57 @@
                 <div class="worker-card">
 
 
-                    <!-- IMAGE -->
+                    <!-- ================= IMAGE ================= -->
 
-                    <div class="worker-image-container">
+                    {% if worker[7] %}
 
-                        {% set image_value = worker[8]|string %}
+                        <img
+                            src="{{ worker[7] }}"
+                            alt="{{ worker[1] }}"
+                            class="worker-image"
+                            loading="lazy"
+                        >
 
-                        {% if image_value and image_value != 'None' and image_value != 'null' %}
+                    {% else %}
 
-                            {% if image_value.startswith('http://') or image_value.startswith('https://') %}
+                        <div class="default-image">
+                            👨‍🌾
+                        </div>
 
-                                <img
-                                    src="{{ image_value }}"
-                                    alt="{{ worker[1] }}"
-                                    class="worker-image"
-                                    loading="lazy"
-                                >
-
-                            {% else %}
-
-                                <img
-                                    src="{{ url_for('static', filename='uploads/' ~ image_value) }}"
-                                    alt="{{ worker[1] }}"
-                                    class="worker-image"
-                                    loading="lazy"
-                                >
-
-                            {% endif %}
-
-                        {% else %}
-
-                            <div class="default-image">
-                                👨‍🌾
-                            </div>
-
-                        {% endif %}
-
-                    </div>
+                    {% endif %}
 
 
-                    <!-- CONTENT -->
+                    <!-- ================= CONTENT ================= -->
 
                     <div class="worker-content">
-
 
                         <div class="worker-name">
                             {{ worker[1] }}
                         </div>
 
 
-                        <div class="work-type">
+                        <div class="work-badge">
                             🛠️ {{ worker[2] }}
                         </div>
 
 
-                        <div class="worker-detail">
-
-                            <span class="detail-icon">📍</span>
-
-                            <span>
-                                {{ worker[3] }}
-                            </span>
-
+                        <div class="detail">
+                            📍 <strong>Location:</strong>
+                            {{ worker[3] }}
                         </div>
 
 
-                        <div class="worker-detail">
-
-                            <span class="detail-icon">📞</span>
-
-                            <span>
-                                {{ worker[4] }}
-                            </span>
-
+                        <div class="detail">
+                            📞 <strong>Contact:</strong>
+                            {{ worker[4] }}
                         </div>
 
 
-                        <!-- AVAILABILITY -->
+                        <div class="detail">
 
-                        <div class="availability">
+                            <strong>Availability:</strong>
 
-                            {% if worker[5]|string|lower == 'available' %}
+                            {% if worker[5] == "Available" %}
 
                                 <span class="available">
                                     🟢 Available
@@ -513,20 +525,32 @@
                         </div>
 
 
-                        <!-- RATING -->
+                        <!-- ================= RATING ================= -->
 
-                        <div class="rating-box">
+                        <div class="rating">
 
-                            {% set review_count = worker[7]|int %}
-                            {% set rating_value = worker[6]|float %}
+                            {% if worker[9] and worker[9]|int > 0 %}
 
-                            {% if review_count > 0 %}
+                                <span class="stars">
 
-                                ⭐ {{ "%.1f"|format(rating_value) }}/5
+                                    {% set rating_value = worker[6]|float %}
 
-                                <span>
-                                    ({{ review_count }}
-                                    review{% if review_count != 1 %}s{% endif %})
+                                    {% for i in range(1, 6) %}
+
+                                        {% if i <= rating_value|round(0, 'common')|int %}
+                                            ★
+                                        {% else %}
+                                            ☆
+                                        {% endif %}
+
+                                    {% endfor %}
+
+                                </span>
+
+                                {{ worker[6]|float|round(1) }}/5
+
+                                <span class="no-rating">
+                                    ({{ worker[9]|int }} review{% if worker[9]|int != 1 %}s{% endif %})
                                 </span>
 
                             {% else %}
@@ -540,15 +564,11 @@
                         </div>
 
 
-                        <!-- PRICE -->
+                        <!-- ================= PRICE ================= -->
 
-                        <div class="price-box">
+                        <div class="price">
 
-                            {% set worker_price = worker[9]|float %}
-
-                            <span class="price">
-                                ₹{{ "%.0f"|format(worker_price) }}
-                            </span>
+                            ₹{{ worker[8]|float|round(0)|int }}
 
                             <span class="price-small">
                                 / day
@@ -557,11 +577,11 @@
                         </div>
 
 
-                        <!-- VIEW PROFILE -->
+                        <!-- ================= PROFILE ================= -->
 
                         <a
                             href="{{ url_for('profile', id=worker[0]) }}"
-                            class="view-profile-btn"
+                            class="profile-btn"
                         >
                             👤 View Profile
                         </a>
@@ -577,30 +597,34 @@
 
     {% else %}
 
+
+        <!-- ================= EMPTY ================= -->
+
         <div class="empty-box">
 
             <h2>
-                😔 No Workers Found
+                😔 No workers found
             </h2>
 
             <p>
-                No workers match your current search.
+                Try changing your search filters
+                or register a new worker.
             </p>
 
             <a
-                href="{{ url_for('display') }}"
-                class="view-profile-btn"
-                style="max-width:200px;margin:20px auto 0;"
+                href="{{ url_for('register') }}"
+                class="profile-btn"
+                style="max-width:300px;margin:20px auto 0;"
             >
-                View All Workers
+                ➕ Register Worker
             </a>
 
         </div>
+
 
     {% endif %}
 
 </div>
 
 </body>
-
 </html>
