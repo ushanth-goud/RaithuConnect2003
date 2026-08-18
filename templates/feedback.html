@@ -1,110 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Submit Feedback</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<style>
-    body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: #f4f7f9;
-margin: 0;
-padding: 0;
-}
 
-.container.profile-container {
-max-width: 500px;
-margin: 50px auto;
-padding: 30px;
-background-color: #ffffff;
-border-radius: 12px;
-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-text-align: center;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-h1 {
-color: #2e7d32;
-font-size: 24px;
-margin-bottom: 25px;
-}
+    <title>Rate {{ worker[1] }} | RaithuConnect</title>
 
-.feedback-form {
-display: flex;
-flex-direction: column;
-gap: 15px;
-}
+    <style>
 
-.feedback-form label {
-font-weight: 600;
-text-align: left;
-color: #333;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.feedback-form select,
-.feedback-form textarea {
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 6px;
-font-size: 16px;
-resize: vertical;
-}
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f7f9;
+        }
 
-.feedback-form textarea {
-min-height: 100px;
-}
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+        }
 
-button[type="submit"] {
-padding: 10px 15px;
-background-color: #2e7d32;
-color: white;
-border: none;
-border-radius: 6px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-}
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
 
-button[type="submit"]:hover {
-background-color: #1b5e20;
-}
+        .worker-name {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
 
-.edit-button {
-display: inline-block;
-margin-top: 20px;
-padding: 10px 15px;
-background-color: #1976d2;
-color: white;
-text-decoration: none;
-border-radius: 6px;
-font-size: 16px;
-transition: background-color 0.3s ease;
-}
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-.edit-button:hover {
-background-color: #0d47a1;
-}
+        label {
+            font-weight: 700;
+            color: #333;
+        }
 
-</style>
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 13px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e8f5e9;
+            color: #166534;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .flash-message {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .danger {
+            background: #ffe1e1;
+            color: #991b1b;
+        }
+
+        .success {
+            background: #d8f3dc;
+            color: #166534;
+        }
+
+    </style>
+
 </head>
+
 <body>
-    <div class="container profile-container">
-        <h1>Submit Feedback for {{ worker.name }}</h1>
 
-        <form method="POST" class="feedback-form" action="{{ url_for('submit_feedback', id=worker.id) }}">
-            <label for="rating">Rating (1 to 5):</label>
-            <select name="rating" required>
-                {% for i in range(1, 6) %}
-                <option value="{{ i }}">{{ i }} Star{% if i > 1 %}s{% endif %}</option>
-                {% endfor %}
-            </select>
+<div class="container">
 
-            <label for="comment">Your Feedback:</label>
-            <textarea name="comment" placeholder="Write your experience..." required></textarea>
+    <h1>
+        ⭐ Rate & Review
+    </h1>
 
-            <button type="submit">Submit Feedback</button>
-        </form>
-
-        <a href="{{ url_for('display', id=worker.id) }}" class="edit-button" style="margin-top: 20px;">Back to Profile</a>
+    <div class="worker-name">
+        {{ worker[1] }}
     </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <form
+        method="POST"
+        class="feedback-form"
+        action="{{ url_for('submit_feedback', id=worker[0]) }}"
+    >
+
+        <label for="rating">
+            ⭐ Your Rating
+        </label>
+
+        <select
+            name="rating"
+            id="rating"
+            required
+        >
+
+            <option value="" disabled selected>
+                Select rating
+            </option>
+
+            <option value="5">
+                ⭐⭐⭐⭐⭐ — Excellent
+            </option>
+
+            <option value="4">
+                ⭐⭐⭐⭐ — Very Good
+            </option>
+
+            <option value="3">
+                ⭐⭐⭐ — Good
+            </option>
+
+            <option value="2">
+                ⭐⭐ — Average
+            </option>
+
+            <option value="1">
+                ⭐ — Poor
+            </option>
+
+        </select>
+
+
+        <label for="comment">
+            📝 Your Review
+        </label>
+
+        <textarea
+            name="comment"
+            id="comment"
+            placeholder="Write your experience with this worker..."
+            required
+        ></textarea>
+
+
+        <button type="submit">
+            Submit Rating & Review
+        </button>
+
+    </form>
+
+
+    <a
+        href="{{ url_for('profile', id=worker[0]) }}"
+        class="back-button"
+    >
+        ← Back to Profile
+    </a>
+
+</div>
+
 </body>
+
 </html>
