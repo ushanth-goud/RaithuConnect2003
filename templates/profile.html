@@ -21,6 +21,8 @@
             color: #263328;
         }
 
+        /* ================= NAVBAR ================= */
+
         .navbar {
             background: #116530;
             min-height: 70px;
@@ -58,11 +60,15 @@
             background: #2e8b57;
         }
 
+        /* ================= WRAPPER ================= */
+
         .profile-wrapper {
             max-width: 900px;
             margin: 45px auto;
             padding: 0 20px;
         }
+
+        /* ================= PROFILE CARD ================= */
 
         .profile-card {
             background: white;
@@ -72,23 +78,35 @@
         }
 
         .profile-header {
-            background: linear-gradient(135deg, #e7f6ea, #f8fff9);
+            background: linear-gradient(
+                135deg,
+                #e7f6ea,
+                #f8fff9
+            );
+
             padding: 35px;
+
             display: flex;
+
             gap: 35px;
+
             align-items: center;
         }
+
+        /* ================= IMAGE ================= */
 
         .profile-photo,
         .default-photo {
             width: 190px;
             height: 190px;
             border-radius: 18px;
+            flex-shrink: 0;
         }
 
         .profile-photo {
             object-fit: cover;
             border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         .default-photo {
@@ -98,6 +116,8 @@
             background: #dff2e2;
             font-size: 85px;
         }
+
+        /* ================= NAME ================= */
 
         .profile-name {
             font-size: 34px;
@@ -117,11 +137,23 @@
             margin-bottom: 15px;
         }
 
+        /* ================= RATING ================= */
+
         .rating {
             font-size: 19px;
             font-weight: 800;
             color: #854d0e;
         }
+
+        .stars {
+            color: #f59e0b;
+        }
+
+        .no-reviews-text {
+            color: #758177;
+        }
+
+        /* ================= DETAILS ================= */
 
         .details {
             padding: 30px 35px;
@@ -140,6 +172,7 @@
             width: 150px;
             font-weight: 700;
             color: #536258;
+            flex-shrink: 0;
         }
 
         .available {
@@ -152,6 +185,8 @@
             font-weight: 800;
         }
 
+        /* ================= PRICE ================= */
+
         .price {
             font-size: 28px;
             font-weight: 800;
@@ -162,6 +197,8 @@
             font-size: 14px;
             color: #6b786f;
         }
+
+        /* ================= ACTIONS ================= */
 
         .actions {
             display: grid;
@@ -188,6 +225,13 @@
             color: #128c45;
         }
 
+        .call-btn:hover,
+        .whatsapp-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* ================= FEEDBACK ================= */
+
         .feedback-btn {
             display: block;
             text-align: center;
@@ -199,6 +243,12 @@
             border-radius: 10px;
             font-weight: 800;
         }
+
+        .feedback-btn:hover {
+            background: #116530;
+        }
+
+        /* ================= REVIEWS ================= */
 
         .reviews-section {
             margin-top: 30px;
@@ -241,6 +291,8 @@
             padding: 20px 0;
         }
 
+        /* ================= BACK ================= */
+
         .back-btn {
             display: inline-block;
             margin-top: 20px;
@@ -249,12 +301,23 @@
             font-weight: 700;
         }
 
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= MOBILE ================= */
+
         @media (max-width: 700px) {
 
             .navbar {
                 flex-direction: column;
                 gap: 10px;
                 padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .profile-header {
@@ -285,13 +348,17 @@
 
 </head>
 
-
 <body>
 
 
+<!-- ================= NAVBAR ================= -->
+
 <nav class="navbar">
 
-    <a href="{{ url_for('home') }}" class="brand">
+    <a
+        href="{{ url_for('home') }}"
+        class="brand"
+    >
         🌱 Raithu<span>Connect</span>
     </a>
 
@@ -305,48 +372,37 @@
             👨‍🌾 Workers
         </a>
 
+        <a href="{{ url_for('register') }}">
+            ➕ Register Worker
+        </a>
+
     </div>
 
 </nav>
 
 
-<div class="profile-wrapper">
+<!-- ================= PROFILE ================= -->
 
+<div class="profile-wrapper">
 
     <div class="profile-card">
 
 
-        <!-- ================= PROFILE HEADER ================= -->
+        <!-- ================= HEADER ================= -->
 
         <div class="profile-header">
 
 
-            {% set image_value = worker[8]|string %}
+            <!-- ================= CLOUDINARY IMAGE ================= -->
 
+            {% if worker[7] %}
 
-            {% if image_value and image_value != 'None' and image_value != 'null' %}
-
-
-                {% if image_value.startswith('http://') or image_value.startswith('https://') %}
-
-                    <img
-                        src="{{ image_value }}"
-                        alt="{{ worker[1] }}"
-                        class="profile-photo"
-                        loading="lazy"
-                    >
-
-                {% else %}
-
-                    <img
-                        src="{{ url_for('static', filename='uploads/' ~ image_value) }}"
-                        alt="{{ worker[1] }}"
-                        class="profile-photo"
-                        loading="lazy"
-                    >
-
-                {% endif %}
-
+                <img
+                    src="{{ worker[7] }}"
+                    alt="{{ worker[1] }}"
+                    class="profile-photo"
+                    loading="lazy"
+                >
 
             {% else %}
 
@@ -357,8 +413,9 @@
             {% endif %}
 
 
-            <div>
+            <!-- ================= BASIC INFO ================= -->
 
+            <div>
 
                 <div class="profile-name">
                     {{ worker[1] }}
@@ -370,27 +427,44 @@
                 </div>
 
 
-                {% set review_count = worker[7]|int %}
-                {% set rating_value = worker[6]|float %}
-
+                <!-- ================= RATING ================= -->
 
                 <div class="rating">
 
-                    {% if review_count > 0 %}
+                    {% if worker[9]|int > 0 %}
 
-                        ⭐ {{ "%.1f"|format(rating_value) }}/5
+                        <span class="stars">
 
-                        — {{ review_count }}
-                        review{% if review_count != 1 %}s{% endif %}
+                            {% set rating_value = worker[6]|float %}
+
+                            {% for i in range(1, 6) %}
+
+                                {% if i <= rating_value|round(0, 'common')|int %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </span>
+
+                        {{ worker[6]|float|round(1) }}/5
+
+                        —
+                        {{ worker[9]|int }}
+
+                        review{% if worker[9]|int != 1 %}s{% endif %}
 
                     {% else %}
 
-                        ⭐ No reviews yet
+                        <span class="no-reviews-text">
+                            ⭐ No reviews yet
+                        </span>
 
                     {% endif %}
 
                 </div>
-
 
             </div>
 
@@ -401,6 +475,8 @@
 
         <div class="details">
 
+
+            <!-- LOCATION -->
 
             <div class="detail-row">
 
@@ -415,6 +491,8 @@
             </div>
 
 
+            <!-- CONTACT -->
+
             <div class="detail-row">
 
                 <div class="detail-label">
@@ -428,27 +506,31 @@
             </div>
 
 
+            <!-- AVAILABILITY -->
+
             <div class="detail-row">
 
                 <div class="detail-label">
                     Availability
                 </div>
 
+                <div>
 
-                {% if worker[5]|string|lower == "available" %}
+                    {% if worker[5] == "Available" %}
 
-                    <div class="available">
-                        🟢 Available
-                    </div>
+                        <span class="available">
+                            🟢 Available
+                        </span>
 
-                {% else %}
+                    {% else %}
 
-                    <div class="busy">
-                        🔴 Busy
-                    </div>
+                        <span class="busy">
+                            🔴 Busy
+                        </span>
 
-                {% endif %}
+                    {% endif %}
 
+                </div>
 
             </div>
 
@@ -461,11 +543,9 @@
                     💰 Service Price
                 </div>
 
-                {% set worker_price = worker[9]|float %}
-
                 <div class="price">
 
-                    ₹{{ "%.0f"|format(worker_price) }}
+                    ₹{{ worker[8]|float|round(0)|int }}
 
                     <span class="price-small">
                         / day
@@ -476,7 +556,7 @@
             </div>
 
 
-            <!-- ACTION BUTTONS -->
+            <!-- ================= ACTION BUTTONS ================= -->
 
             <div class="actions">
 
@@ -502,7 +582,7 @@
             </div>
 
 
-            <!-- FEEDBACK -->
+            <!-- ================= FEEDBACK ================= -->
 
             <a
                 href="{{ url_for('submit_feedback', id=worker[0]) }}"
@@ -521,7 +601,6 @@
 
     <div class="reviews-section">
 
-
         <h2 class="reviews-title">
             ⭐ Customer Reviews
         </h2>
@@ -529,22 +608,23 @@
 
         {% if reviews %}
 
-
             {% for review in reviews %}
-
 
                 <div class="review">
 
 
-                    {% set review_rating = review[0]|int %}
-
+                    <!-- IMPORTANT:
+                         feedback SELECT is:
+                         id = review[0]
+                         rating = review[1]
+                         comment = review[2]
+                    -->
 
                     <div class="review-rating">
 
-
                         {% for i in range(1, 6) %}
 
-                            {% if i <= review_rating %}
+                            {% if i <= review[1]|int %}
                                 ★
                             {% else %}
                                 ☆
@@ -552,22 +632,18 @@
 
                         {% endfor %}
 
-
-                        {{ review_rating }}/5
-
+                        {{ review[1]|int }}/5
 
                     </div>
 
 
                     <div class="review-comment">
 
-                        "{{ review[1] }}"
+                        "{{ review[2] }}"
 
                     </div>
 
-
                 </div>
-
 
             {% endfor %}
 
@@ -585,11 +661,10 @@
 
         {% endif %}
 
-
     </div>
 
 
-    <!-- BACK -->
+    <!-- ================= BACK ================= -->
 
     <a
         href="{{ url_for('display') }}"
@@ -601,7 +676,5 @@
 
 </div>
 
-
 </body>
-
 </html>
