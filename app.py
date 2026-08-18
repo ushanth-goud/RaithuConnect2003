@@ -955,7 +955,7 @@ def profile(id):
         return render_template(
             "profile.html",
             worker=worker,
-            feedback_list=feedback_list
+            reviews=feedback_list
         )
 
 
