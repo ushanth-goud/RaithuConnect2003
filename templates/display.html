@@ -486,13 +486,19 @@
 <!-- ================= FLASH MESSAGES ================= -->
 
 {% with messages = get_flashed_messages(with_categories=true) %}
+
     {% if messages %}
+
         {% for category, message in messages %}
+
             <div class="flash-message {{ category }}">
                 {{ message }}
             </div>
+
         {% endfor %}
+
     {% endif %}
+
 {% endwith %}
 
 
@@ -643,24 +649,45 @@
 
                 <div class="worker-card">
 
-                    <!-- Image -->
+                    <!-- ================= IMAGE ================= -->
 
                     <div class="worker-image-wrapper">
 
                         {% if worker[7] %}
 
-                            <img
-                                src="{{ url_for('static', filename='uploads/' + worker[7]) }}"
-                                class="worker-image"
-                                alt="{{ worker[1] }}"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                            >
+                            {% if worker[7].startswith('http://') or worker[7].startswith('https://') %}
+
+                                <!-- Cloudinary Image -->
+
+                                <img
+                                    src="{{ worker[7] }}"
+                                    class="worker-image"
+                                    alt="{{ worker[1] }}"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                >
+
+                            {% else %}
+
+                                <!-- Old Local Image -->
+
+                                <img
+                                    src="{{ url_for('static', filename='uploads/' + worker[7]) }}"
+                                    class="worker-image"
+                                    alt="{{ worker[1] }}"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                >
+
+                            {% endif %}
 
                             <div class="default-avatar" style="display:none;">
                                 👨‍🌾
                             </div>
 
                         {% else %}
+
+                            <!-- No Image -->
 
                             <div class="default-avatar">
                                 👨‍🌾
@@ -689,15 +716,13 @@
                         <!-- Rating -->
 
                         <div class="rating-badge">
-
                             ⭐ {{ worker[6] }}/5
-
                         </div>
 
                     </div>
 
 
-                    <!-- Content -->
+                    <!-- ================= CONTENT ================= -->
 
                     <div class="worker-content">
 
@@ -764,6 +789,7 @@
                             <a
                                 href="https://wa.me/91{{ worker[4] }}"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 class="action-btn whatsapp-btn"
                             >
                                 💬 WhatsApp
