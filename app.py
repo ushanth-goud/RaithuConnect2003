@@ -6,6 +6,8 @@ from werkzeug.utils import secure_filename
 from flask_babel import Babel, _
 import os
 import uuid
+import cloudinary
+import cloudinary.uploader
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "change-this-secret-key")
