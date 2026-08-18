@@ -1,1750 +1,1043 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RaithuConnect | Agricultural Services</title>
-
-    <link rel="manifest"
-          href="{{ url_for('static', filename='manifest.json') }}">
-
-    <meta name="theme-color" content="#1b5e20">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <style>
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            color: #1f2937;
-            background: #ffffff;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(12px);
-
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .nav-container {
-            max-width: 1250px;
-            margin: auto;
-
-            min-height: 76px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 25px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        .brand-name {
-            font-family: "Poppins", sans-serif;
-            font-size: 25px;
-            font-weight: 800;
-            color: #1b5e20;
-        }
-
-        .brand-name span {
-            color: #f59e0b;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links a {
-            padding: 9px 14px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-
-            border-radius: 8px;
-
-            transition: 0.25s;
-        }
-
-        .nav-links a:hover {
-            color: #1b5e20;
-            background: #f0fdf4;
-        }
-
-        .login-btn {
-            background: #1b5e20 !important;
-            color: white !important;
-            padding: 10px 20px !important;
-        }
-
-        .login-btn:hover {
-            background: #145218 !important;
-        }
-
-        /* LANGUAGE */
-
-        .language-form {
-            margin-left: 8px;
-        }
-
-        .language-form select {
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-
-            padding: 8px 10px;
-
-            background: white;
-            color: #374151;
-
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-            position: relative;
-            min-height: 650px;
-
-            display: flex;
-            align-items: center;
-
-            overflow: hidden;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(10,45,18,0.90),
-                    rgba(10,45,18,0.68),
-                    rgba(10,45,18,0.25)
-                ),
-                url("/static/plantationworkers.jpg");
-
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-container {
-            width: 100%;
-            max-width: 1250px;
-            margin: auto;
-
-            padding: 80px 25px;
-        }
-
-        .hero-content {
-            max-width: 700px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-
-            padding: 8px 15px;
-
-            background: rgba(255,255,255,0.14);
-            border: 1px solid rgba(255,255,255,0.25);
-
-            border-radius: 30px;
-
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 600;
-
-            margin-bottom: 22px;
-
-            backdrop-filter: blur(8px);
-        }
-
-        .hero h1 {
-            font-family: "Poppins", sans-serif;
-
-            color: white;
-
-            font-size: clamp(40px, 6vw, 70px);
-            line-height: 1.08;
-
-            font-weight: 800;
-
-            margin-bottom: 22px;
-        }
-
-        .hero h1 span {
-            color: #fbbf24;
-        }
-
-        .hero-description {
-            color: #e5e7eb;
-
-            font-size: 18px;
-
-            max-width: 620px;
-
-            margin-bottom: 32px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .primary-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 14px 24px;
-
-            border-radius: 9px;
-
-            background: #f59e0b;
-            color: white;
-
-            font-weight: 700;
-            font-size: 15px;
-
-            transition: 0.25s;
-        }
-
-        .primary-btn:hover {
-            background: #d97706;
-            transform: translateY(-2px);
-        }
-
-        .secondary-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 14px 24px;
-
-            border-radius: 9px;
-
-            border: 1px solid rgba(255,255,255,0.5);
-
-            background: rgba(255,255,255,0.10);
-
-            color: white;
-
-            font-weight: 700;
-            font-size: 15px;
-
-            backdrop-filter: blur(8px);
-
-            transition: 0.25s;
-        }
-
-        .secondary-btn:hover {
-            background: white;
-            color: #1b5e20;
-        }
-
-        /* =====================================================
-           SEARCH
-        ===================================================== */
-
-        .search-wrapper {
-            max-width: 1100px;
-
-            margin: -45px auto 0;
-
-            position: relative;
-            z-index: 10;
-
-            padding: 0 20px;
-        }
-
-        .search-card {
-            background: white;
-
-            border-radius: 15px;
-
-            padding: 22px;
-
-            box-shadow:
-                0 15px 40px rgba(0,0,0,0.12);
-
-            border: 1px solid #e5e7eb;
-        }
-
-        .search-title {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 19px;
-            font-weight: 700;
-
-            margin-bottom: 15px;
-
-            color: #1f2937;
-        }
-
-        .search-form {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr 1fr auto;
-
-            gap: 12px;
-        }
-
-        .search-form select {
-            width: 100%;
-
-            padding: 13px 14px;
-
-            border: 1px solid #d1d5db;
-            border-radius: 9px;
-
-            background: #f9fafb;
-
-            color: #374151;
-
-            font-size: 14px;
-        }
-
-        .search-form select:focus {
-            outline: none;
-
-            border-color: #1b5e20;
-
-            box-shadow:
-                0 0 0 3px rgba(27,94,32,0.10);
-        }
-
-        .search-button {
-            border: none;
-
-            border-radius: 9px;
-
-            padding: 13px 22px;
-
-            background: #1b5e20;
-            color: white;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition: 0.25s;
-        }
-
-        .search-button:hover {
-            background: #145218;
-        }
-
-        /* =====================================================
-           SECTION
-        ===================================================== */
-
-        .section {
-            max-width: 1250px;
-            margin: auto;
-
-            padding: 90px 25px;
-        }
-
-        .section-header {
-            text-align: center;
-
-            max-width: 700px;
-
-            margin: auto auto 45px;
-        }
-
-        .section-label {
-            color: #1b5e20;
-
-            text-transform: uppercase;
-
-            letter-spacing: 2px;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 36px;
-
-            color: #111827;
-
-            margin-bottom: 12px;
-        }
-
-        .section-description {
-            color: #6b7280;
-
-            font-size: 15px;
-        }
-
-        /* =====================================================
-           SERVICES
-        ===================================================== */
-
-        .services-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 18px;
-        }
-
-        .service-card {
-            background: white;
-
-            border: 1px solid #e5e7eb;
-
-            border-radius: 14px;
-
-            overflow: hidden;
-
-            transition: 0.3s;
-
-            cursor: pointer;
-        }
-
-        .service-card:hover {
-            transform: translateY(-7px);
-
-            box-shadow:
-                0 15px 30px rgba(0,0,0,0.09);
-
-            border-color: #bbf7d0;
-        }
-
-        .service-image {
-            height: 160px;
-
-            width: 100%;
-
-            object-fit: cover;
-        }
-
-        .service-info {
-            padding: 17px;
-        }
-
-        .service-info h3 {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 17px;
-
-            margin-bottom: 5px;
-
-            color: #111827;
-        }
-
-        .service-info p {
-            font-size: 13px;
-
-            color: #6b7280;
-        }
-
-        /* =====================================================
-           HOW IT WORKS
-        ===================================================== */
-
-        .how-section {
-            background: #f0fdf4;
-        }
-
-        .steps {
-            max-width: 1100px;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 25px;
-        }
-
-        .step {
-            text-align: center;
-
-            padding: 25px;
-        }
-
-        .step-number {
-            width: 55px;
-            height: 55px;
-
-            margin: auto auto 18px;
-
-            border-radius: 50%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #1b5e20;
-
-            color: white;
-
-            font-weight: 800;
-
-            font-size: 18px;
-        }
-
-        .step h3 {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 17px;
-
-            margin-bottom: 7px;
-        }
-
-        .step p {
-            color: #6b7280;
-
-            font-size: 13px;
-        }
-
-        /* =====================================================
-           WHY CHOOSE
-        ===================================================== */
-
-        .features-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 20px;
-        }
-
-        .feature {
-            padding: 25px;
-
-            border-radius: 14px;
-
-            background: #ffffff;
-
-            border: 1px solid #e5e7eb;
-        }
-
-        .feature-icon {
-            font-size: 30px;
-
-            margin-bottom: 12px;
-        }
-
-        .feature h3 {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 17px;
-
-            margin-bottom: 7px;
-        }
-
-        .feature p {
-            color: #6b7280;
-
-            font-size: 13px;
-        }
-
-        /* =====================================================
-           CTA
-        ===================================================== */
-
-        .cta-section {
-            padding: 80px 25px;
-        }
-
-        .cta {
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 60px 50px;
-
-            border-radius: 20px;
-
-            background:
-                linear-gradient(
-                    110deg,
-                    #14532d,
-                    #166534
-                );
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 30px;
-        }
-
-        .cta h2 {
-            font-family: "Poppins", sans-serif;
-
-            color: white;
-
-            font-size: 32px;
-
-            margin-bottom: 8px;
-        }
-
-        .cta p {
-            color: #d1fae5;
-
-            font-size: 15px;
-        }
-
-        .cta-button {
-            background: white;
-
-            color: #166534;
-
-            padding: 14px 24px;
-
-            border-radius: 9px;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-
-            transition: 0.25s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-
-            background: #f0fdf4;
-        }
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-            background: #111827;
-
-            color: #d1d5db;
-
-            padding: 55px 25px 25px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                2fr 1fr 1fr;
-
-            gap: 50px;
-        }
-
-        .footer-brand {
-            font-family: "Poppins", sans-serif;
-
-            font-size: 24px;
-
-            color: white;
-
-            margin-bottom: 12px;
-        }
-
-        .footer-about {
-            max-width: 430px;
-
-            font-size: 14px;
-
-            color: #9ca3af;
-        }
-
-        .footer-column h3 {
-            color: white;
-
-            font-size: 15px;
-
-            margin-bottom: 15px;
-        }
-
-        .footer-column a {
-            display: block;
-
-            font-size: 13px;
-
-            color: #9ca3af;
-
-            margin-bottom: 9px;
-
-            transition: 0.2s;
-        }
-
-        .footer-column a:hover {
-            color: white;
-        }
-
-        .copyright {
-            max-width: 1200px;
-
-            margin: 40px auto 0;
-
-            padding-top: 20px;
-
-            border-top: 1px solid #374151;
-
-            text-align: center;
-
-            color: #9ca3af;
-
-            font-size: 12px;
-        }
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        @media (max-width: 1000px) {
-
-            .nav-links a:not(.login-btn) {
-                display: none;
-            }
-
-            .services-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .steps {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .search-form {
-                grid-template-columns:
-                    1fr 1fr;
-            }
-
-            .search-button {
-                width: 100%;
-            }
-
-            .cta {
-                flex-direction: column;
-
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            .nav-container {
-                min-height: 68px;
-
-                padding: 0 15px;
-            }
-
-            .brand-name {
-                font-size: 20px;
-            }
-
-            .brand img {
-                width: 40px;
-                height: 40px;
-            }
-
-            .language-form {
-                display: none;
-            }
-
-            .hero {
-                min-height: 600px;
-
-                background-position: center;
-            }
-
-            .hero-container {
-                padding: 60px 20px;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .hero-description {
-                font-size: 15px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-
-                align-items: stretch;
-            }
-
-            .primary-btn,
-            .secondary-btn {
-                text-align: center;
-            }
-
-            .search-wrapper {
-                margin-top: -25px;
-            }
-
-            .search-form {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 65px 20px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .services-grid,
-            .steps,
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-image {
-                height: 200px;
-            }
-
-            .cta {
-                padding: 45px 25px;
-            }
-
-            .cta h2 {
-                font-size: 26px;
-            }
-
-            .footer-container {
-                grid-template-columns: 1fr;
-
-                gap: 30px;
-            }
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RaithuConnect | Agricultural Workers</title>
+
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#166534">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: #17231a;
+      background: #f7faf7;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #166534;
+      font-weight: 800;
+      font-size: 24px;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #374151;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #16a34a;
+    }
+
+    .login-btn {
+      background: #166534;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 9px;
+    }
+
+    .login-btn:hover {
+      background: #14532d;
+    }
+
+    .lang-select {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 9px 10px;
+      background: white;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7, 45, 20, 0.94) 0%,
+          rgba(7, 45, 20, 0.80) 45%,
+          rgba(7, 45, 20, 0.25) 100%
+        ),
+        url("{{ url_for('static', filename='plantationworkers.jpg') }}")
+        center/cover no-repeat;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      padding: 90px 24px;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      color: white;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.08;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: #86efac;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 590px;
+      color: #e5f5e9;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 14px 23px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .primary-btn {
+      background: #22c55e;
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background: #16a34a;
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background: white;
+      color: #166534;
+    }
+
+    .secondary-btn:hover {
+      background: #dcfce7;
+      transform: translateY(-2px);
+    }
+
+    /* ================= STATS ================= */
+
+    .stats {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .stats-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #166534;
+      font-size: 30px;
+    }
+
+    .stat p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= SECTION ================= */
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 24px;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: auto auto 50px;
+    }
+
+    .section-heading .label {
+      color: #16a34a;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .section-heading h2 {
+      font-size: 40px;
+      margin: 10px 0 14px;
+      color: #14532d;
+    }
+
+    .section-heading p {
+      color: #6b7280;
+    }
+
+    /* ================= HOW IT WORKS ================= */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    }
+
+    .step-icon {
+      width: 60px;
+      height: 60px;
+      margin: auto auto 18px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #166534;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 27px;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      color: #14532d;
+    }
+
+    .step p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= SERVICES ================= */
+
+    .services {
+      background: #ecfdf5;
+    }
+
+    .service-grid {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #d1fae5;
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.10);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .service-info {
+      padding: 20px;
+    }
+
+    .service-info h3 {
+      color: #14532d;
+      margin-bottom: 7px;
+    }
+
+    .service-info p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= WHY US ================= */
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .why-image img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 22px;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 15px;
+    }
+
+    .check {
+      width: 35px;
+      height: 35px;
+      min-width: 35px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #15803d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .why-item h3 {
+      color: #14532d;
+      margin-bottom: 4px;
+    }
+
+    .why-item p {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta {
+      background:
+        linear-gradient(
+          100deg,
+          #14532d,
+          #166534
+        );
+      color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 85px 24px;
+    }
+
+    .cta h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #dcfce7;
+      margin-bottom: 28px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #0f2416;
+      color: #d1d5db;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 55px 24px 25px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand {
+      color: white;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .footer-container p {
+      font-size: 14px;
+      color: #9ca3af;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+      color: #9ca3af;
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    .footer-column a:hover {
+      color: #86efac;
+    }
+
+    .copyright {
+      border-top: 1px solid #1f3b27;
+      text-align: center;
+      padding: 20px;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .steps,
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .nav-container {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        min-height: 600px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .steps,
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading h2 {
+        font-size: 32px;
+      }
+
+      .why-image img {
+        height: 300px;
+      }
+
+      .cta h2 {
+        font-size: 32px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
+<!-- ================= NAVBAR ================= -->
 
 <header class="navbar">
+  <div class="nav-container">
 
-    <div class="nav-container">
+    <a href="{{ url_for('home') }}" class="brand">
+      <img
+        src="{{ url_for('static', filename='rc_logo.jpg') }}"
+        alt="RaithuConnect"
+      >
+      RaithuConnect
+    </a>
 
-        <a href="{{ url_for('home') }}" class="brand">
+    <nav class="nav-links">
 
-            <img
-                src="{{ url_for('static', filename='rc_logo.jpg') }}"
-                alt="RaithuConnect Logo"
-            >
+      <a href="{{ url_for('home') }}">
+        {{ _('Home') }}
+      </a>
 
-            <div class="brand-name">
-                Raithu<span>Connect</span>
-            </div>
+      <a href="{{ url_for('about') }}">
+        {{ _('About') }}
+      </a>
 
-        </a>
+      <a href="{{ url_for('contact') }}">
+        {{ _('Contact') }}
+      </a>
 
+      <a href="{{ url_for('sign_in') }}" class="login-btn">
+        {{ _('Login') }}
+      </a>
 
-        <nav class="nav-links">
+      <form method="get" action="">
+        <select
+          name="lang"
+          class="lang-select"
+          onchange="this.form.submit()"
+        >
+          <option value="en">English</option>
+          <option value="te">తెలుగు</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+      </form>
 
-            <a href="{{ url_for('home') }}">
-                {{ _('Home') }}
-            </a>
+    </nav>
 
-            <a href="{{ url_for('about') }}">
-                {{ _('About') }}
-            </a>
-
-            <a href="{{ url_for('contact') }}">
-                {{ _('Contact') }}
-            </a>
-
-            <a href="{{ url_for('sign_in') }}"
-               class="login-btn">
-                {{ _('Login') }}
-            </a>
-
-
-            <form
-                class="language-form"
-                method="get"
-                action=""
-            >
-
-                <select
-                    name="lang"
-                    onchange="this.form.submit()"
-                >
-
-                    <option
-                        value="en"
-                        {% if request.args.get('lang') == 'en' %}
-                        selected
-                        {% endif %}
-                    >
-                        English
-                    </option>
-
-                    <option
-                        value="te"
-                        {% if request.args.get('lang') == 'te' %}
-                        selected
-                        {% endif %}
-                    >
-                        తెలుగు
-                    </option>
-
-                    <option
-                        value="hi"
-                        {% if request.args.get('lang') == 'hi' %}
-                        selected
-                        {% endif %}
-                    >
-                        हिन्दी
-                    </option>
-
-                </select>
-
-            </form>
-
-        </nav>
-
-    </div>
-
+  </div>
 </header>
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-    <div class="hero-container">
+  <div class="hero-container">
 
-        <div class="hero-content">
+    <div class="hero-content">
 
-            <div class="hero-badge">
-                🌾 {{ _('Connecting Farmers & Agricultural Workers') }}
-            </div>
+      <div class="hero-badge">
+        🌾 Smart Agriculture • Better Connectivity
+      </div>
 
+      <h1>
+        Connecting Farmers
+        <span>With Skilled Workers</span>
+      </h1>
 
-            <h1>
-                {{ _('Find Trusted') }}
-                <span>{{ _('Agricultural Workers') }}</span>
-                {{ _('Near You') }}
-            </h1>
+      <p>
+        Find reliable agricultural workers for plantation,
+        tractor operations, harvesting, drone services,
+        spraying, weeding and more — all in one place.
+      </p>
 
+      <div class="hero-buttons">
 
-            <p class="hero-description">
+        <a
+          href="{{ url_for('homepage') }}"
+          class="primary-btn"
+        >
+          Find Workers →
+        </a>
 
-                {{ _(
-                    'Connect with skilled agricultural workers for '
-                    'tractors, harvesting, plantation, spraying, '
-                    'JCB, drones and other farming services.'
-                ) }}
+        <a
+          href="{{ url_for('sign_up') }}"
+          class="secondary-btn"
+        >
+          Register / Sign Up
+        </a>
 
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <a
-                    href="{{ url_for('display') }}"
-                    class="primary-btn"
-                >
-                    🔎 {{ _('Find Workers') }}
-                </a>
-
-
-                <a
-                    href="{{ url_for('register') }}"
-                    class="secondary-btn"
-                >
-                    👨‍🌾 {{ _('Register as Worker') }}
-                </a>
-
-            </div>
-
-        </div>
+      </div>
 
     </div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     SEARCH
-========================================================= -->
+<!-- ================= STATS ================= -->
 
-<div class="search-wrapper">
+<section class="stats">
 
-    <div class="search-card">
+  <div class="stats-container">
 
-        <div class="search-title">
-            🔎 {{ _('Search Agricultural Workers') }}
-        </div>
-
-
-        <form
-            class="search-form"
-            action="{{ url_for('display') }}"
-            method="get"
-        >
-
-            <select name="work_type">
-
-                <option value="">
-                    {{ _('Select Service') }}
-                </option>
-
-                <option value="Plantation">
-                    🌱 Plantation
-                </option>
-
-                <option value="Tractor">
-                    🚜 Tractor
-                </option>
-
-                <option value="Harvester">
-                    🌾 Harvester
-                </option>
-
-                <option value="Drone">
-                    🚁 Drone
-                </option>
-
-                <option value="JCB">
-                    🚜 JCB
-                </option>
-
-                <option value="Sprayer">
-                    💧 Sprayer
-                </option>
-
-                <option value="Weeding">
-                    🌿 Weeding
-                </option>
-
-            </select>
-
-
-            <input
-                type="text"
-                name="location"
-                placeholder="{{ _('Enter Location') }}"
-                style="
-                    width:100%;
-                    padding:13px 14px;
-                    border:1px solid #d1d5db;
-                    border-radius:9px;
-                    background:#f9fafb;
-                    font-size:14px;
-                "
-            >
-
-
-            <select name="availability">
-
-                <option value="">
-                    {{ _('Availability') }}
-                </option>
-
-                <option value="Available">
-                    {{ _('Available') }}
-                </option>
-
-                <option value="Not Available">
-                    {{ _('Not Available') }}
-                </option>
-
-            </select>
-
-
-            <button
-                type="submit"
-                class="search-button"
-            >
-                {{ _('Search') }}
-            </button>
-
-        </form>
-
+    <div class="stat">
+      <h2>9+</h2>
+      <p>Agricultural Services</p>
     </div>
 
-</div>
+    <div class="stat">
+      <h2>24/7</h2>
+      <p>Easy Worker Discovery</p>
+    </div>
+
+    <div class="stat">
+      <h2>⭐</h2>
+      <p>Worker Ratings & Reviews</p>
+    </div>
+
+  </div>
+
+</section>
 
 
-<!-- =========================================================
-     SERVICES
-========================================================= -->
+<!-- ================= HOW IT WORKS ================= -->
 
 <section class="section">
 
-    <div class="section-header">
+  <div class="section-heading">
 
-        <div class="section-label">
-            {{ _('Our Services') }}
-        </div>
+    <span class="label">Simple Process</span>
 
-        <h2 class="section-title">
-            {{ _('Everything You Need for Farming') }}
-        </h2>
+    <h2>How RaithuConnect Works</h2>
 
-        <p class="section-description">
-            {{ _(
-                'Find skilled workers and agricultural services '
-                'for different farming requirements.'
-            ) }}
-        </p>
+    <p>
+      Finding the right agricultural worker is simple,
+      fast and convenient.
+    </p>
+
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step">
+
+      <div class="step-icon">🔎</div>
+
+      <h3>Find a Service</h3>
+
+      <p>
+        Choose the agricultural service you need
+        from our available categories.
+      </p>
 
     </div>
 
 
-    <div class="services-grid">
+    <div class="step">
 
+      <div class="step-icon">👷</div>
 
-        <a
-            href="{{ url_for('display', work_type='Plantation') }}"
-            class="service-card"
-        >
+      <h3>Choose a Worker</h3>
 
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='plantationworkers.jpg') }}"
-                alt="Plantation Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🌱 {{ _('Plantation Workers') }}</h3>
-
-                <p>
-                    {{ _('Skilled workers for planting and plantation work.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='Tractor') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='tractor.avif') }}"
-                alt="Tractor Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🚜 {{ _('Tractor Workers') }}</h3>
-
-                <p>
-                    {{ _('Experienced tractor operators for farm work.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='Harvester') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='agro.avif') }}"
-                alt="Harvester Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🌾 {{ _('Harvester Workers') }}</h3>
-
-                <p>
-                    {{ _('Workers for efficient harvesting operations.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='Drone') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='drone.jpg') }}"
-                alt="Drone Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🚁 {{ _('Drone Services') }}</h3>
-
-                <p>
-                    {{ _('Modern drone-based agricultural services.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='JCB') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='jcb2.jpeg') }}"
-                alt="JCB Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🚜 {{ _('JCB Workers') }}</h3>
-
-                <p>
-                    {{ _('JCB operators for agricultural land work.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='Sprayer') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='spray3.jpeg') }}"
-                alt="Sprayer Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>💧 {{ _('Sprayer Workers') }}</h3>
-
-                <p>
-                    {{ _('Professional crop spraying services.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display', work_type='Weeding') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='weeding.jpg') }}"
-                alt="Weeding Workers"
-            >
-
-            <div class="service-info">
-
-                <h3>🌿 {{ _('Weeding Workers') }}</h3>
-
-                <p>
-                    {{ _('Reliable workers for field maintenance.') }}
-                </p>
-
-            </div>
-
-        </a>
-
-
-        <a
-            href="{{ url_for('display') }}"
-            class="service-card"
-        >
-
-            <img
-                class="service-image"
-                src="{{ url_for('static', filename='borewells.jpeg') }}"
-                alt="Agricultural Services"
-            >
-
-            <div class="service-info">
-
-                <h3>🌾 {{ _('View All Workers') }}</h3>
-
-                <p>
-                    {{ _('Explore all available agricultural workers.') }}
-                </p>
-
-            </div>
-
-        </a>
-
+      <p>
+        Browse workers and check their location,
+        availability, price and ratings.
+      </p>
 
     </div>
+
+
+    <div class="step">
+
+      <div class="step-icon">📞</div>
+
+      <h3>Connect Directly</h3>
+
+      <p>
+        Contact the worker directly and discuss
+        your farming requirements.
+      </p>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     HOW IT WORKS
-========================================================= -->
+<!-- ================= SERVICES ================= -->
 
-<section class="how-section">
+<section class="services">
 
-    <div class="section">
+  <div class="section-heading" style="padding-top:80px;">
 
-        <div class="section-header">
+    <span class="label">Our Services</span>
 
-            <div class="section-label">
-                {{ _('Simple Process') }}
-            </div>
+    <h2>Agricultural Services</h2>
 
-            <h2 class="section-title">
-                {{ _('How RaithuConnect Works') }}
-            </h2>
+    <p>
+      Find workers for different farming and agricultural activities.
+    </p>
 
-            <p class="section-description">
-                {{ _(
-                    'Finding the right agricultural worker is simple.'
-                ) }}
-            </p>
-
-        </div>
+  </div>
 
 
-        <div class="steps">
+  <div class="service-grid">
 
-
-            <div class="step">
-
-                <div class="step-number">
-                    1
-                </div>
-
-                <h3>
-                    🔎 {{ _('Search') }}
-                </h3>
-
-                <p>
-                    {{ _('Choose the service and location you need.') }}
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    2
-                </div>
-
-                <h3>
-                    👨‍🌾 {{ _('Compare') }}
-                </h3>
-
-                <p>
-                    {{ _('View worker profiles, ratings and prices.') }}
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    3
-                </div>
-
-                <h3>
-                    ⭐ {{ _('Check Ratings') }}
-                </h3>
-
-                <p>
-                    {{ _('Choose workers based on real customer feedback.') }}
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    4
-                </div>
-
-                <h3>
-                    📞 {{ _('Contact') }}
-                </h3>
-
-                <p>
-                    {{ _('Contact the worker and arrange your service.') }}
-                </p>
-
-            </div>
-
-
-        </div>
-
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='plantationworkers.jpg') }}"
+        alt="Plantation Workers"
+      >
+      <div class="service-info">
+        <h3>🌱 Plantation Workers</h3>
+        <p>Skilled workers for plantation activities.</p>
+      </div>
     </div>
+
+
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='tractor.avif') }}"
+        alt="Tractor Workers"
+      >
+      <div class="service-info">
+        <h3>🚜 Tractor Workers</h3>
+        <p>Find experienced tractor operators.</p>
+      </div>
+    </div>
+
+
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='harvestor.jpg') }}"
+        alt="Harvester Workers"
+      >
+      <div class="service-info">
+        <h3>🌾 Harvester Workers</h3>
+        <p>Connect with harvesting professionals.</p>
+      </div>
+    </div>
+
+
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='drone.jpg') }}"
+        alt="Drone Workers"
+      >
+      <div class="service-info">
+        <h3>🚁 Drone Workers</h3>
+        <p>Drone operators for crop monitoring and spraying.</p>
+      </div>
+    </div>
+
+
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='jcb2.jpeg') }}"
+        alt="JCB Workers"
+      >
+      <div class="service-info">
+        <h3>🏗️ JCB Workers</h3>
+        <p>Skilled JCB operators for agricultural work.</p>
+      </div>
+    </div>
+
+
+    <div class="service-card">
+      <img
+        src="{{ url_for('static', filename='spray3.jpeg') }}"
+        alt="Sprayer Workers"
+      >
+      <div class="service-info">
+        <h3>💧 Sprayer Workers</h3>
+        <p>Workers for pesticide and fertilizer spraying.</p>
+      </div>
+    </div>
+
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     WHY CHOOSE US
-========================================================= -->
+<!-- ================= WHY RAITHUCONNECT ================= -->
 
 <section class="section">
 
-    <div class="section-header">
+  <div class="why-grid">
 
-        <div class="section-label">
-            {{ _('Why RaithuConnect') }}
-        </div>
+    <div class="why-image">
 
-        <h2 class="section-title">
-            {{ _('Built for Farmers') }}
-        </h2>
+      <img
+        src="{{ url_for('static', filename='weeding.jpg') }}"
+        alt="Agricultural Worker"
+      >
 
-        <p class="section-description">
-            {{ _(
-                'A simple platform designed to make agricultural '
-                'worker discovery easier.'
-            ) }}
+    </div>
+
+
+    <div>
+
+      <div class="section-heading" style="text-align:left; margin:0 0 35px;">
+
+        <span class="label">Why Choose Us</span>
+
+        <h2>Built for Farmers</h2>
+
+        <p>
+          RaithuConnect makes it easier for farmers
+          to find the right people for their agricultural needs.
         </p>
 
+      </div>
+
+
+      <div class="why-list">
+
+        <div class="why-item">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h3>Easy Worker Discovery</h3>
+            <p>
+              Quickly browse agricultural workers based
+              on the service you need.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h3>Worker Ratings</h3>
+            <p>
+              Check real ratings and feedback before
+              contacting a worker.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h3>Direct Contact</h3>
+            <p>
+              Connect directly with workers and discuss
+              your requirements.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h3>Multiple Services</h3>
+            <p>
+              Plantation, tractors, harvesting, drones,
+              JCB, spraying and more.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
-
-    <div class="features-grid">
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                ⭐
-            </div>
-
-            <h3>
-                {{ _('Real Ratings') }}
-            </h3>
-
-            <p>
-                {{ _(
-                    'See ratings and feedback submitted by users.'
-                ) }}
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                📍
-            </div>
-
-            <h3>
-                {{ _('Location Search') }}
-            </h3>
-
-            <p>
-                {{ _(
-                    'Find agricultural workers based on location.'
-                ) }}
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                📞
-            </div>
-
-            <h3>
-                {{ _('Direct Contact') }}
-            </h3>
-
-            <p>
-                {{ _(
-                    'Contact workers directly for your farming needs.'
-                ) }}
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                🖼️
-            </div>
-
-            <h3>
-                {{ _('Worker Profiles') }}
-            </h3>
-
-            <p>
-                {{ _(
-                    'View worker information, images, services and prices.'
-                ) }}
-            </p>
-
-        </div>
-
-
-    </div>
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     WORKER CTA
-========================================================= -->
+<!-- ================= CTA ================= -->
 
-<section class="cta-section">
+<section class="cta">
 
-    <div class="cta">
+  <div class="cta-container">
 
-        <div>
+    <h2>Ready to Find the Right Worker?</h2>
 
-            <h2>
-                {{ _('Are You an Agricultural Worker?') }}
-            </h2>
+    <p>
+      Explore agricultural workers and connect with
+      the right person for your farming needs.
+    </p>
 
-            <p>
-                {{ _(
-                    'Register your services on RaithuConnect '
-                    'and connect with farmers.'
-                ) }}
-            </p>
+    <a
+      href="{{ url_for('homepage') }}"
+      class="secondary-btn"
+    >
+      Explore Workers →
+    </a>
 
-        </div>
-
-
-        <a
-            href="{{ url_for('register') }}"
-            class="cta-button"
-        >
-            👨‍🌾 {{ _('Register as Worker') }}
-        </a>
-
-    </div>
+  </div>
 
 </section>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-    <div class="footer-container">
+  <div class="footer-container">
 
+    <div>
 
-        <div>
+      <div class="footer-brand">
+        🌾 RaithuConnect
+      </div>
 
-            <div class="footer-brand">
-                🌾 RaithuConnect
-            </div>
-
-            <p class="footer-about">
-
-                {{ _(
-                    'RaithuConnect connects farmers with '
-                    'agricultural workers and services, helping '
-                    'make farming easier and more connected.'
-                ) }}
-
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                {{ _('Quick Links') }}
-            </h3>
-
-            <a href="{{ url_for('home') }}">
-                {{ _('Home') }}
-            </a>
-
-            <a href="{{ url_for('display') }}">
-                {{ _('Find Workers') }}
-            </a>
-
-            <a href="{{ url_for('register') }}">
-                {{ _('Register Worker') }}
-            </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                {{ _('Company') }}
-            </h3>
-
-            <a href="{{ url_for('about') }}">
-                {{ _('About Us') }}
-            </a>
-
-            <a href="{{ url_for('contact') }}">
-                {{ _('Contact Us') }}
-            </a>
-
-            <a href="{{ url_for('sign_in') }}">
-                {{ _('Login') }}
-            </a>
-
-        </div>
-
+      <p>
+        Connecting farmers with skilled agricultural
+        workers and services.
+      </p>
 
     </div>
 
 
-    <div class="copyright">
+    <div class="footer-column">
 
-        © 2026 RaithuConnect.
-        {{ _('All rights reserved.') }}
+      <h3>Navigation</h3>
+
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
 
     </div>
+
+
+    <div class="footer-column">
+
+      <h3>Get Started</h3>
+
+      <a href="{{ url_for('sign_in') }}">Login</a>
+      <a href="{{ url_for('sign_up') }}">Sign Up</a>
+      <a href="{{ url_for('homepage') }}">Find Workers</a>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+
+    © 2026 RaithuConnect. All rights reserved.
+
+  </div>
 
 </footer>
 
 
-<!-- =========================================================
-     SERVICE WORKER
-========================================================= -->
-
 <script>
 
-    if ("serviceWorker" in navigator) {
+if ("serviceWorker" in navigator) {
 
-        window.addEventListener("load", function () {
+  window.addEventListener("load", function () {
 
-            navigator.serviceWorker.register(
-                "{{ url_for('service_worker') }}"
-            )
-            .then(function () {
+    navigator.serviceWorker.register(
+      "{{ url_for('static', filename='sw.js') }}"
+    )
+    .then(function () {
+      console.log("RaithuConnect Service Worker registered");
+    })
+    .catch(function (error) {
+      console.log("Service Worker registration failed:", error);
+    });
 
-                console.log(
-                    "RaithuConnect Service Worker registered."
-                );
+  });
 
-            })
-            .catch(function (error) {
-
-                console.log(
-                    "Service Worker registration failed:",
-                    error
-                );
-
-            });
-
-        });
-
-    }
+}
 
 </script>
-
 
 </body>
 </html>
